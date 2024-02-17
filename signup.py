@@ -16,13 +16,6 @@ def log_in():
     import login
     
     
-    
-    
-    
-    
-    
-
-
 def connect_database():
     conn = sqlite3.connect("dri.db")
     db = conn.cursor()
@@ -73,13 +66,6 @@ def connect_database():
             
             
             
-              # Clear the form entries before destroying the window
-            
-             # Destroy the window after successful registration
-             # Import the login module after destroying the window
-            
-
-
 
        
 
@@ -90,24 +76,6 @@ def clear():
     contact_entry.delete(0, 'end')
     password_entry.delete(0, 'end')
     conf_password_entry.delete(0, 'end')
-
-
-        
-        
-
-        
-       
-        
-            
-
-        # conn.close()
-        # messagebox.showinfo('Success', 'Registration Successful')
-
-
-
-
-
-
 
 
 
