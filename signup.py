@@ -14,6 +14,13 @@ root.geometry("1920x1080")
 def log_in():
     root.destroy()
     import login
+    
+    
+    
+    
+    
+    
+    
 
 
 def connect_database():
@@ -59,10 +66,18 @@ def connect_database():
             conn.close()   
 
             messagebox.showinfo('Success', 'Registration Successful')
-              # Clear the form entries before destroying the window
-            root.destroy()  # Destroy the window after successful registration
-            import login  # Import the login module after destroying the window
             clear()
+            root.destroy() 
+            import login 
+            
+            
+            
+            
+              # Clear the form entries before destroying the window
+            
+             # Destroy the window after successful registration
+             # Import the login module after destroying the window
+            
 
 
 
