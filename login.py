@@ -4,14 +4,23 @@ from tkinter import*
 from PIL import Image, ImageTk
 
 
+
 root= Tk()
 
 #Start login page
 root.title("login")
 
 def login():
-    import signup
     root.destroy()
+    
+    import signup
+   
+
+    
+   
+
+   
+
 
 root.geometry("1980x1080")
 welcome = Label(root,text="Welcome  to  the  entrance",font=("Cabiler",23)).place(x=560, y=250)
@@ -30,13 +39,7 @@ title = Button(root, text="Log in",width=45,fg="white", bg="sky blue", font=("Ca
 
 
 
-# image = Image.open("drive logo.webp")  
-# photo = ImageTk.PhotoImage(image)
 
-# image_label=Label(root,image=photo)
-# image_label.place(x=750)
-
-#login frontend end
 
 
 
@@ -45,4 +48,11 @@ root.mainloop()
 
 
 
-root.mainloop()
+# conn = sqlite3.connect("kri.db")
+# db = conn.cursor()
+# db.execute("""CREATE TABLE IF NOT EXISTS information
+#                (id INTEGER PRIMARY KEY AUTOINCREMENT,
+#                 name TEXT,
+#                 address TEXT,
+#                 contact INT)""")
+# conn.close()
