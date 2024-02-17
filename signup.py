@@ -1,6 +1,11 @@
 from tkinter import*
 from PIL import Image, ImageTk
 
+def log_in():
+    import login
+    root.destroy()
+
+
 
 root=Tk()
 root.title("Sign up")
@@ -8,7 +13,7 @@ root.title("Sign up")
 root.geometry("1920x1080")
 
 title = Label(root,text="Already have an account?",font=("Honk",11)).place(x=1280, y=25)
-Login = Button(root,text="Login",border=0,font=("Honk",11,"underline"),fg="sky blue").place(x=1450, y=24)
+Login = Button(root,text="Login",border=0,font=("Honk",11,"underline"),fg="sky blue",command=log_in).place(x=1450, y=24)
 
 sign_up_title = Label(root,text="Sign up",font=("Cabiler",23)).place(x=1115 , y=114)
 account_title = Label(root,text="Create your account",font=("cabiler",13)).place(x=1095 , y=165)
