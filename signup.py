@@ -80,7 +80,7 @@ def clear():
 
 
 title = Label(root,text="Already have an account?",font=("Honk",11)).place(x=1280, y=25)
-Login = Button(root,text="Login",border=0,font=("Honk",11,"underline"),fg="sky blue",command=log_in).place(x=1450, y=24)
+Login = Button(root,text="Login",border=0,cursor='hand2',font=("Honk",11,"underline"),fg="sky blue",command=log_in).place(x=1450, y=24)
 
 
 sign_up_title = Label(root,text="Sign up",font=("Cabiler",23)).place(x=1115 , y=114)
@@ -104,7 +104,7 @@ password_entry.place(x=1000, y=450,height=25)
 conf_Password = Label(root,text="Confirm Password*",font=("Honk",10)).place(x=1000, y=490)
 conf_password_entry = Entry(root,width=52,show='*',font=("cabiler",10,"bold"))
 conf_password_entry.place(x=1000, y=510,height=25)
-Register_button = Button(root,text="Register",width=45,border=0,fg="white",bg="sky blue", font=("Honk",10),command=connect_database).place(x=1000, y=560,height=28)
+Register_button = Button(root,cursor='hand2',text="Register",width=45,border=0,fg="white",bg="sky blue", font=("Honk",10),command=connect_database).place(x=1000, y=560,height=28)
 image = Image.open("loginnn.jpg")  
 photo = ImageTk.PhotoImage(image)
 
