@@ -108,7 +108,7 @@ Register_button = Button(root,cursor='hand2',text="Register",width=45,border=0,f
 image = Image.open("loginnn.jpg")  
 photo = ImageTk.PhotoImage(image)
 
-image_label=Label(root,bg="grey",width=782,height=789,image=photo)
+image_label=Label(root,image=photo)
 image_label.place(x=0)
 
 root.mainloop()

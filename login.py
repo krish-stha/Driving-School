@@ -1,5 +1,3 @@
-
-
 from tkinter import*
 from PIL import Image, ImageTk
 from tkinter import messagebox
@@ -141,7 +139,16 @@ title = Button(root,text="Forget password",border=0, font=("Cabiler",10,"underli
 
 log_in_button = Button(root, cursor='hand2',text="Log in", width=45, fg="white", bg="sky blue", font=("Caliber", 10), command=login_user)
 log_in_button.place(x=560, y=545)
+
+
+font=Label(root,text="PRO DRIVE ACADEMY",font=("coudex",14,"bold"),fg="black")
+font.place(x=640,y=200)
+
+image = Image.open("ddd.png")  
+photo = ImageTk.PhotoImage(image)
+
+image_label=Label(root,image=photo)
+image_label.place(x=665,y=113)
 clear()
 
 root.mainloop()
-
