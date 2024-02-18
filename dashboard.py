@@ -7,6 +7,9 @@ root=Tk()
 root.geometry("1920x1080")
 root.title('Dashboard')
 root.config(bg="white")
+def std():
+    root.destroy()
+    import student
 
 
 # add button
@@ -112,7 +115,7 @@ entry.place(x=535,y=22)
 home=Button(big_label,text="Home",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
 home.place(x=40,y=500)
 
-student=Button(big_label,text="Student",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
+student=Button(big_label,text="Student",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=std)
 student.place(x=40,y=560)
 
 

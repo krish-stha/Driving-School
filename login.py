@@ -33,7 +33,7 @@ def login_user():
              
             conn.close()
             root.destroy()
-            import dashboard
+            import student
 def clear():
     username_entry.delete(0, 'end')
     password_entry.delete(0, 'end')
