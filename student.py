@@ -1,6 +1,40 @@
 from tkinter import *
 from PIL import Image, ImageTk
 from tkinter import messagebox
+import sqlite3
+
+import sqlite3
+
+def add_student_record(first_name, last_name, dob, client_id, email, phone, street, city, state, zip_code, country):
+    # Connect to the database
+    conn = sqlite3.connect("dri.db")
+    cursor = conn.cursor()
+
+    # Create table if not exists
+    cursor.execute('''CREATE TABLE IF NOT EXISTS students (
+                        id INTEGER PRIMARY KEY,
+                        first_name TEXT,
+                        last_name TEXT,
+                        dob TEXT,
+                        client_id TEXT,
+                        email TEXT,
+                        phone TEXT,
+                        street TEXT,
+                        city TEXT,
+                        state TEXT,
+                        zip TEXT,
+                        country TEXT
+                    )''')
+
+    # Insert data into the database
+    cursor.execute('''INSERT INTO students (first_name, last_name, dob, client_id, email, phone, street, city, state, zip, country) 
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)''',
+                   (first_name, last_name, dob, client_id, email, phone, street, city, state, zip_code, country))
+
+    # Commit changes and close connection
+    conn.commit()
+    conn.close()
+
 
 
 def home():
@@ -40,7 +74,7 @@ entry =Entry( root,width=15, font=("cabiler", 14,"bold"),fg="black",bd=0)
 entry.insert(0, placeholder)
 entry.bind("<FocusIn>", lambda event: entry.delete(0, END) if entry.get() == placeholder else None)
 entry.bind("<FocusOut>", lambda event: entry.insert(0, placeholder) if entry.get() == "" else None)
-entry.config(fg='grey')  # Change text color to grey
+entry.config(fg='grey')  
 
 
 entry.place(x=370,y=22)
@@ -85,3 +119,4 @@ pro.place(x=100,y=120)
 
 
 root.mainloop()
+

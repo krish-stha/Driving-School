@@ -166,3 +166,16 @@ pro.place(x=100,y=120)
 
 
 root.mainloop()
+
+
+
+
+
+
+
+##############above orginal
+
+
+
+
+
