@@ -89,7 +89,7 @@ def forget_password():
     heading_label.place(x=80,y=20)
     email=Label(window,text="Email",bg='black',font=('cabiler',12,'bold'),fg='sky blue')
     email.place(x=30,y=80)
-    email_entry=Entry(window,width=25,fg='white',bg='black',font=("cabiler", 10, "bold"),bd=0)
+    email_entry=Entry(window,width=40,fg='white',bg='black',font=("cabiler", 10, "bold"),bd=0)
     email_entry.place(x=30,y=110)
     Frame(window,width=270,height=2,bg='white').place(x=30,y=130)
 
