@@ -1,7 +1,7 @@
 from tkinter import *
 from PIL import Image, ImageTk
 from tkinter import messagebox
-
+from datetime import datetime, timedelta
 
 root=Tk()
 root.geometry("1920x1080")
@@ -19,47 +19,116 @@ def form():
     window.title('Details')
     window.geometry(f'900x400+450+195')
 
+
+   
+
+
     def add():
-        messagebox.showinfo("Success","Added  Successfully")
+        first_name = first_name_box.get()
+        last_name = last_name_box.get()
+        date_of_birth = date_box.get()
+        email = email_box.get()
+        phone = phone_box.get()
 
-        window.destroy()
+        # Check if any required field is empty
+        if (first_name == '' or last_name == '' or date_of_birth == '' or email == '' or phone == '' or street_box.get() == '' or city_box.get() == '' or state_box.get() == '' or zip_box.get() == '' or country_box.get() == ''):
+            messagebox.showerror('Error', 'All Fields Are Required.', parent=window)
+            return
+
+        # Check if first name and last name contain only alphabets
+        if not first_name.isalpha() or not last_name.isalpha():
+            messagebox.showerror('Error', 'First name and last name should contain only alphabets.', parent=window)
+            return
+
+         # Check if date is in the correct format and the person is above 16 years old
+
+# Parse birth date
+        from datetime import datetime
+
+# Parse birth date
+        try:
+            birth_date = datetime.strptime(date_of_birth, '%Y-%m-%d')
+        except ValueError:
+            messagebox.showerror('Error', 'Date must be in YYYY-MM-DD format.', parent=window)
+            return
+
+        # Get current date
+        current_date = datetime.now()
+
+        # Adjust current date if the birth date is in the future
+        if birth_date > current_date:
+            birth_date = birth_date.replace(year=birth_date.year - 100)  # Subtract 100 years
+
+        # Calculate age
+        age = current_date.year - birth_date.year - ((current_date.month, current_date.day) < (birth_date.month, birth_date.day))
+
+        # Check if age is below 16
+        if age < 16:
+            messagebox.showerror('Error', 'Age must be 16 years or older to be registered.', parent=window)
+            return
 
 
-    
+        # Check if email ends with '@gmail.com'
+        if not email.lower().endswith('@gmail.com'):
+            messagebox.showerror('Error', 'Email must end with @gmail.com.', parent=window)
+            return
+
+        # Check if phone number is a digit and has 10 digits
+        if not phone.isdigit() or len(phone) != 10:
+            messagebox.showerror('Error', 'Phone number must be a 10-digit number.', parent=window)
+            return
+
+        # If all validations pass, you can proceed with your logic
+        # Your logic to add the data can go here
+        else:
+            window.destroy()
+
+            
     # Personal details 
     personal = Label(window,text="PERSONAL DETAILS",border=5,font=("arial rounded MT Bold",10,"bold"),fg="#3985FF").place(x=10, y=10)
     first_name = Label(window,text="First Name",font=("arial rounded MT Bold",8)).place(x=10, y=50)
-    first_name_box = Entry(window,width=40).place(x=10, y=70)
+    first_name_box = Entry(window,width=40)
+    first_name_box.place(x=10, y=70)
     last_name = Label(window,text="Last Name",font=("arial rounded MT Bold",8)).place(x=300, y=50)
-    last_name_box = Entry(window,width=40).place(x=300, y=70)
+    last_name_box = Entry(window,width=40)
+    last_name_box.place(x=300, y=70)
     date = Label(window,text="D.O.B",font=("arial rounded MT Bold",8)).place(x=10, y=100)
-    date_box = Entry(window, width=40).place(x=10, y=120)
+    date_box = Entry(window, width=40)
+    date_box.place(x=10, y=120)
     instruction = Label(window,text="Date must be in YYYY-MM-DD[2012-12-22]format",font=("arial rounded MT Bold",7)).place(x=10, y=140)
     Client_id = Label(window,text="Client id",font=("arial rounded MT Bold",8)).place(x=300, y=100)
-    client_id_box = Entry(window,width=40).place(x=300, y=120)
+    client_id_box = Entry(window,width=40)
+    client_id_box.place(x=300, y=120)
 
     email = Label(window,text="Email",font=("arial rounded MT Bold",8)).place(x=600,y=50)
-    email_box = Entry(window,width=40).place(x=600, y=70)
+    email_box = Entry(window,width=40)
+    email_box.place(x=600, y=70)
     phone = Label(window,text="Phone",font=("arial rounded MT Bold",8)).place(x=600,y=100)
-    phone_box = Entry(window,width=40).place(x=600, y=120)
-
+    phone_box = Entry(window,width=40)
+    phone_box.place(x=600, y=120)
 
     street = Label(window,text="Street",font=("arial rounded MT Bold",8)).place(x=10,y=180)
-    street_box = Entry(window,width=40).place(x=10, y=200)
+    street_box = Entry(window,width=40)
+    street_box.place(x=10, y=200)
     city = Label(window,text="City",font=("arial rounded MT Bold",8)).place(x=300,y=180)
-    city_box = Entry(window,width=40).place(x=300, y=200)
+    city_box = Entry(window,width=40)
+    city_box.place(x=300, y=200)
     state = Label(window,text="State",font=("arial rounded MT Bold",8)).place(x=600,y=180)
-    state_box = Entry(window,width=40).place(x=600, y=200)
+    state_box = Entry(window,width=40)
+    state_box.place(x=600, y=200)
 
-    zip = Label(window,text="Zip/Post Code",font=("arial rounded MT Bold",8)).place(x=10,y=250)
-    zip_box = Entry(window,width=40).place(x=10, y=270)
+    _zip = Label(window,text="Zip/Post Code",font=("arial rounded MT Bold",8)).place(x=10,y=250)
+    zip_box = Entry(window,width=40)
+    zip_box.place(x=10, y=270)
     country = Label(window,text="Country",font=("arial rounded MT Bold",8)).place(x=300,y=250)
-    country_box = Entry(window,width=40).place(x=300, y=270)
+    country_box = Entry(window,width=40)
+    country_box.place(x=300, y=270)
 
     add_button=Button(window,text="Add",font=("arial rounded MT Bold",12,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=add)
     add_button.place(x=350,y=320)
 
     root.mainloop()
+
 
 
 # document section

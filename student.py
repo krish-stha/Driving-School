@@ -98,7 +98,7 @@ invoice.place(x=40,y=620)
 
 
 # stering image
-image = Image.open("g.png")  
+image = Image.open("drivelogo.png")  
 photo = ImageTk.PhotoImage(image)
 
 image_label=Label(big_label,image=photo,bg="#152844")
