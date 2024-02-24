@@ -1,7 +1,14 @@
+
+
+
+###########################################
+
 from tkinter import *
 from PIL import Image, ImageTk
 from tkinter import messagebox
-from datetime import datetime, timedelta
+import sqlite3
+from datetime import datetime
+
 
 root=Tk()
 root.geometry("1920x1080")
@@ -10,7 +17,8 @@ root.config(bg="white")
 def std():
     root.destroy()
     import student
-
+    
+category_value="bike"
 
 # add button
 def form():
@@ -18,36 +26,42 @@ def form():
     window.config()
     window.title('Details')
     window.geometry(f'900x400+450+195')
-
-
-   
-
+    
 
     def add():
-        first_name = first_name_box.get()
-        last_name = last_name_box.get()
-        date_of_birth = date_box.get()
-        email = email_box.get()
-        phone = phone_box.get()
+        first_name_value=first_name_box.get()
+        last_name_value=last_name_box.get()
+        date_value=date_box.get()
+        client_id_value=client_id_box.get()
+        email_value=email_box.get()
+        phone_value=phone_box.get()
+        street_value=street_box.get()
+        state_value=state_box.get()
+        country_value=country_box.get()
+        city_value=city_box.get()
+        zip_value=zip_box.get()  
+
+
+        
 
         # Check if any required field is empty
-        if (first_name == '' or last_name == '' or date_of_birth == '' or email == '' or phone == '' or street_box.get() == '' or city_box.get() == '' or state_box.get() == '' or zip_box.get() == '' or country_box.get() == ''):
+        if (first_name_value == '' or last_name_value == '' or client_id_value =='' or date_value == '' or email_value == '' or phone_value == '' or street_value == '' or city_value== '' or state_value == '' or zip_value == '' or country_value == ''):
             messagebox.showerror('Error', 'All Fields Are Required.', parent=window)
             return
 
         # Check if first name and last name contain only alphabets
-        if not first_name.isalpha() or not last_name.isalpha():
+        if not first_name_value.isalpha() or not last_name_value.isalpha():
             messagebox.showerror('Error', 'First name and last name should contain only alphabets.', parent=window)
             return
 
          # Check if date is in the correct format and the person is above 16 years old
 
 # Parse birth date
-        from datetime import datetime
+       
 
 # Parse birth date
         try:
-            birth_date = datetime.strptime(date_of_birth, '%Y-%m-%d')
+            birth_date = datetime.strptime(date_value, '%Y-%m-%d')
         except ValueError:
             messagebox.showerror('Error', 'Date must be in YYYY-MM-DD format.', parent=window)
             return
@@ -69,21 +83,80 @@ def form():
 
 
         # Check if email ends with '@gmail.com'
-        if not email.lower().endswith('@gmail.com'):
+        if not email_value.lower().endswith('@gmail.com'):
             messagebox.showerror('Error', 'Email must end with @gmail.com.', parent=window)
             return
 
         # Check if phone number is a digit and has 10 digits
-        if not phone.isdigit() or len(phone) != 10:
+        if not phone_value.isdigit() or len(phone_value) != 10:
             messagebox.showerror('Error', 'Phone number must be a 10-digit number.', parent=window)
             return
-
-        # If all validations pass, you can proceed with your logic
-        # Your logic to add the data can go here
+        
         else:
-            window.destroy()
 
-            
+        
+        
+            try:
+                conn = sqlite3.connect("dri.db")
+                db = conn.cursor()
+
+                db.execute(
+                """INSERT INTO usersData(firstName,lastName,dob,clientId,email,number,street,city,state,country,category,zipCode) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (first_name_value, last_name_value, date_value, client_id_value,email_value,phone_value,street_value,city_value,state_value,country_value,category_value,zip_value),
+                )
+                conn.commit()
+                messagebox.showinfo("Success","Added  Successfully")
+
+            except sqlite3.Error as e:
+                messagebox.showerror("Error", f"An error occurred: {e}")
+
+            finally:
+                db.close()
+                conn.close()
+                retrieve()
+
+    def retrieve():
+        try:
+            conn = sqlite3.connect("dri.db")
+            db = conn.cursor()
+
+            db.execute("SELECT * FROM usersData")
+
+            records = db.fetchall()
+            print(records)
+
+        except sqlite3.Error as e:
+            messagebox.showerror("Error", f"An error occurred: {e}")
+
+        finally:
+            db.close()
+            conn.close()
+
+
+   
+    #connecting to database
+    conn = sqlite3.connect("dri.db")
+    db = conn.cursor()
+    db.execute("""CREATE TABLE IF NOT EXISTS usersData(
+                usersId INTEGER PRIMARY KEY AUTOINCREMENT,
+                firstName varchar(255),
+                lastName varchar(255),
+                dob varchar(255),
+                clientId integer,
+                email varchar(255),
+                number integer,
+                street varchar(255),
+                city varchar(255),
+                state varchar(255),
+                country varchar(255),
+                category varchar(255),
+                zipCode integer
+                )""")
+    conn.commit()
+    conn.close()
+    retrieve()
+    
     # Personal details 
     personal = Label(window,text="PERSONAL DETAILS",border=5,font=("arial rounded MT Bold",10,"bold"),fg="#3985FF").place(x=10, y=10)
     first_name = Label(window,text="First Name",font=("arial rounded MT Bold",8)).place(x=10, y=50)
@@ -107,6 +180,7 @@ def form():
     phone_box = Entry(window,width=40)
     phone_box.place(x=600, y=120)
 
+
     street = Label(window,text="Street",font=("arial rounded MT Bold",8)).place(x=10,y=180)
     street_box = Entry(window,width=40)
     street_box.place(x=10, y=200)
@@ -117,18 +191,33 @@ def form():
     state_box = Entry(window,width=40)
     state_box.place(x=600, y=200)
 
-    _zip = Label(window,text="Zip/Post Code",font=("arial rounded MT Bold",8)).place(x=10,y=250)
+    zip = Label(window,text="Zip/Post Code",font=("arial rounded MT Bold",8)).place(x=10,y=250)
     zip_box = Entry(window,width=40)
     zip_box.place(x=10, y=270)
     country = Label(window,text="Country",font=("arial rounded MT Bold",8)).place(x=300,y=250)
     country_box = Entry(window,width=40)
     country_box.place(x=300, y=270)
+    
+    def on_select(value):
+        global category_value
+        category_value=value
+        
+        print(category_value)
+    
+    options = ["Bike", "Scooter", "Car"]
+
+    selected_option = StringVar(window)
+    selected_option.set(options[0])
+    
+    category=Label(window,text="Category",font=("arial rounded MT Bold",8)).place(x=600,y=250)
+
+    option_menu = OptionMenu(window, selected_option, *options, command=on_select)
+    option_menu.place(x=600,y=270)
 
     add_button=Button(window,text="Add",font=("arial rounded MT Bold",12,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=add)
     add_button.place(x=350,y=320)
 
     root.mainloop()
-
 
 
 # document section
@@ -214,14 +303,14 @@ closed_text=Label(right_label, height=5,text="Number Of Closed Student",fg="whit
 closed_text.place(x=800, y=520)
 
 # stering image
-image = Image.open("drivelogo.png")  
+image = Image.open("g.png")  
 photo = ImageTk.PhotoImage(image)
 
 image_label=Label(big_label,image=photo,bg="#152844")
-image_label.place(x=15,y=10)
+image_label.place(x=0,y=10)
 
-pro=Label(big_label,text="Pro Driving Academy",font=("arial rounded MT bold",13,"bold"),fg="white",bg="#152844")
-pro.place(x=80,y=100)
+pro=Label(big_label,text="Pro Driving Academy",font=("arial rounded MT bold",16),fg="white",bg="#152844")
+pro.place(x=100,y=120)
 
 
 
@@ -243,8 +332,4 @@ root.mainloop()
 
 
 ##############above orginal
-
-
-
-
 
