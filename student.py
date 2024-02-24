@@ -260,7 +260,7 @@ def edit_record(event):
             editor.destroy()
             for row in tree.get_children():
                 tree.delete(row)
-                show_data()
+            show_data()
             
 
    
