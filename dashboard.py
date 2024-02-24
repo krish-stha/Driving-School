@@ -145,14 +145,14 @@ closed_text=Label(right_label, height=5,text="Number Of Closed Student",fg="whit
 closed_text.place(x=800, y=520)
 
 # stering image
-image = Image.open("g.png")  
+image = Image.open("drivelogo.png")  
 photo = ImageTk.PhotoImage(image)
 
 image_label=Label(big_label,image=photo,bg="#152844")
-image_label.place(x=0,y=10)
+image_label.place(x=15,y=10)
 
-pro=Label(big_label,text="Pro Driving Academy",font=("arial rounded MT bold",16),fg="white",bg="#152844")
-pro.place(x=100,y=120)
+pro=Label(big_label,text="Pro Driving Academy",font=("arial rounded MT bold",13,"bold"),fg="white",bg="#152844")
+pro.place(x=80,y=100)
 
 
 
