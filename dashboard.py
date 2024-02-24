@@ -17,15 +17,14 @@ root.config(bg="white")
 def std():
     root.destroy()
     import student
-    
-category_value="bike"
+
 
 # add button
 def form():
     window=Toplevel()
     window.config()
     window.title('Details')
-    window.geometry(f'900x400+450+195')
+    window.geometry(f'860x400+450+195')
     
 
     def add():
@@ -40,12 +39,13 @@ def form():
         country_value=country_box.get()
         city_value=city_box.get()
         zip_value=zip_box.get()  
+        category_value=category_box.get()
 
 
         
 
         # Check if any required field is empty
-        if (first_name_value == '' or last_name_value == '' or client_id_value =='' or date_value == '' or email_value == '' or phone_value == '' or street_value == '' or city_value== '' or state_value == '' or zip_value == '' or country_value == ''):
+        if (first_name_value == '' or last_name_value == '' or client_id_value =='' or date_value == '' or email_value == '' or phone_value == '' or street_value == '' or category_value=='' or city_value== '' or state_value == '' or zip_value == '' or country_value == ''):
             messagebox.showerror('Error', 'All Fields Are Required.', parent=window)
             return
 
@@ -198,21 +198,10 @@ def form():
     country_box = Entry(window,width=40)
     country_box.place(x=300, y=270)
     
-    def on_select(value):
-        global category_value
-        category_value=value
-        
-        print(category_value)
-    
-    options = ["Bike", "Scooter", "Car"]
-
-    selected_option = StringVar(window)
-    selected_option.set(options[0])
-    
     category=Label(window,text="Category",font=("arial rounded MT Bold",8)).place(x=600,y=250)
+    category_box = Entry(window,width=40)
+    category_box.place(x=600,y=270)
 
-    option_menu = OptionMenu(window, selected_option, *options, command=on_select)
-    option_menu.place(x=600,y=270)
 
     add_button=Button(window,text="Add",font=("arial rounded MT Bold",12,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=add)
     add_button.place(x=350,y=320)

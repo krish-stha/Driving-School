@@ -86,7 +86,7 @@ def edit_record(event):
     global editor
     editor = Tk()
     editor.title("Update Data")
-    editor.geometry(f'900x400+450+195')
+    editor.geometry(f'860x400+450+195')
     editor.resizable(False, False)
 
     global firstName_editor
@@ -147,6 +147,13 @@ def edit_record(event):
     country = Label(editor,text="Country",font=("arial rounded MT Bold",8)).place(x=300,y=250)
     country_editor = Entry(editor,width=40)
     country_editor.place(x=300, y=270)
+    category=Label(editor,text="Category",font=("arial rounded MT Bold",8)).place(x=600,y=250)
+    category_editor = Entry(editor,width=40)
+    category_editor.place(x=600,y=270)
+
+    
+
+
     
     #defaultValuesOnEdit
     firstName_editor.insert(0, values[1])
@@ -159,27 +166,13 @@ def edit_record(event):
     city_editor.insert(0, values[8])
     state_editor.insert(0, values[9])
     country_editor.insert(0, values[10])
+    category_editor.insert(0, values[11])
     zip_editor.insert(0, values[12])
     
-    def on_select(value):
-        
-        global category_editor
-        category_editor=value
-        
     
-    options = ["Bike", "Scooter", "Car"]
-
-    selected_option = StringVar(editor)
-    selected_option.set(options[0])
       
     
-    category=Label(editor,text="Category",font=("arial rounded MT Bold",8)).place(x=600,y=250)
-
-    option_menu = OptionMenu(editor, selected_option, *options, command=on_select)
-    option_menu.config(highlightthickness=0, width=35,bg="white")  # Adjust desired_width as needed
-    option_menu.place(x=600, y=270)
-
-
+    
     #update function
     def update_data():
         
@@ -255,7 +248,7 @@ def edit_record(event):
                     city_editor.get(),
                     state_editor.get(),
                     country_editor.get(),
-                    category_editor,
+                    category_editor.get(),
                     zip_editor.get(),
                     userId,
                 ),
@@ -270,8 +263,15 @@ def edit_record(event):
                 show_data()
             
 
-    edit_button = Button(editor, text="SAVE",width=20,command=update_data)
-    edit_button.place(x=300, y=310)
+   
+    edit_button=Button(editor,text="Save",font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=update_data)
+    edit_button.place(x=340,y=310)
+
+    delete_button=Button(editor,text="Delete",font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=update_data)
+    delete_button.place(x=50,y=320)
+
+    closed_button=Button(editor,text="Close",font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=update_data)
+    closed_button.place(x=660,y=320)
 
 
 #show data
