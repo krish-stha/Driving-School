@@ -64,14 +64,14 @@ invoice.place(x=40,y=620)
 
 
 # stering image
-image = Image.open("g.png")  
+image = Image.open("drivelogo.png")  
 photo = ImageTk.PhotoImage(image)
 
 image_label=Label(big_label,image=photo,bg="#152844")
-image_label.place(x=0,y=10)
+image_label.place(x=17,y=10)
 
-pro=Label(big_label,text="Pro Driving Academy",font=("arial rounded MT bold",16),fg="white",bg="#152844")
-pro.place(x=100,y=120)
+pro=Label(big_label,text="Pro Driving Academy",font=("arial rounded MT bold",13,"bold"),fg="white",bg="#152844")
+pro.place(x=78,y=100)
 
 
 # image_button.place(x=505, y=35)

@@ -43,7 +43,7 @@ def forget_password():
 
     def change_pass():
         if email_entry.get()=='' or new_pass_entry.get()=='' or conf_pass_entry.get()=='':
-            messagebox.showerror('Error','All Fields Are Required',parent=window) # error show in window 
+            messagebox.showerror('Error','All Fields Are Rsequired',parent=window) # error show in window 
 
         elif new_pass_entry.get()!=conf_pass_entry.get():
             messagebox.showerror('Error','Password and Confirm Password are not matching',parent=window)
