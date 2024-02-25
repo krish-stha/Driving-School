@@ -20,10 +20,27 @@ def home():
     import dashboard
     
 
-image1 = Image.open("b.png")  
-photo1 = ImageTk.PhotoImage(image1)
-image_label=Button(root,image=photo1,cursor='hand2',bd=0,bg="white")
-image_label.place(x=1420,y=10)
+def signOut():
+    root.destroy()
+    import login
+
+def show_user_menu(event):
+    user_menu.post(event.x_root, event.y_root)
+
+profile_image = PhotoImage(file="b.png")
+
+# Create a profile icon button with the image
+profile_icon_button = Button(root, cursor='hand2', image=profile_image, bd=0, bg="white", width=32, height=32)
+profile_icon_button.place(x=1420, y=10)
+
+# Create a menu for the user
+user_menu = Menu(root, tearoff=0, bg="lightgray", fg="black", font=("Helvetica", 10, "bold"))
+user_menu.add_command(label="Sanjeev Manandhar", font=("Helvetica", 10), command=lambda: print("User clicked"))
+user_menu.add_separator()
+user_menu.add_command(label="Sign out", font=("Helvetica", 10, "bold"), command=signOut)
+
+# Bind the menu to the profile icon button
+profile_icon_button.bind("<Button-1>", show_user_menu)
 
 def search_students():
     """
