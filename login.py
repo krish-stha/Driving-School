@@ -39,8 +39,7 @@ def login_user():
         else:
             messagebox.showinfo('Welcome','Login is Successful.')
            
-             
-
+        
             conn.close()
             root.destroy()
             import dashboard
