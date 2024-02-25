@@ -125,7 +125,7 @@ root.geometry("1980x1080")
 welcome = Label(root, text="Welcome  to  the  entrance", font=("Cabiler", 23)).place(x=560, y=250)
 login_in = Label(root, text="log into continue.", font=("Cabiler", 23)).place(x=560, y=285)
 question = Label(root, text="Don't you have an account?", font=("Cabiler", 13)).place(x=560, y=330)
-sign_up = Button(root, text="Create a new account.", border=0, font=("Cabiler", 13, "underline"), fg="sky blue", command=login).place(x=765, y=327)
+sign_up = Button(root, text="Create a new account.", border=0, font=("Cabiler", 13, "underline"),cursor='hand2', fg="sky blue", command=login).place(x=765, y=327)
 
 username = Label(root, text="Email", font=("Cabiler", 10)).place(x=560, y=365)
 username_entry = Entry(root, width=52, border=4, font=("cabiler", 10, "bold"))
