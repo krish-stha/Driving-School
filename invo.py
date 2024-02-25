@@ -123,7 +123,7 @@ def change_password():
 
 # Labels
 
-invo_label=Label(root,bg="white",relief="ridge",bd=5)  
+invo_label=Label(root,bg="white",relief="ridge",bd=2)  
 invo_label.place(x=700,y=80,height=660,width=500) 
 
 heading_label=Label(invo_label,bg='white', text='Change Password',font=('cabiler',18,'bold'),fg='black')

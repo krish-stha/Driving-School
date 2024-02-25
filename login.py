@@ -105,6 +105,7 @@ def forget_password():
                 messagebox.showinfo('success','Password is reset, please login with new password.', parent=window)
                 clear()
                 window.destroy()
+                
 
     def clear():
         """

@@ -123,8 +123,8 @@ def payment():
     root.destroy()
     import invo
 
-home=Button(big_label,text="Home",cursor='hand2',font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=home)
-home.place(x=40,y=500)
+home1=Button(big_label,text="Home",cursor='hand2',font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=home)
+home1.place(x=40,y=500)
 
 student=Button(big_label,text="Student",cursor='hand2',font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
 student.place(x=40,y=560)
