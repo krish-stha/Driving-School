@@ -122,22 +122,47 @@ def change_password():
 
 
 # Labels
-email=Label(root, text="email").place(x=600,y=80)
-email_entry = Entry(root)
-email_entry.place(x=600,y=120)
 
-old=Label(root, text="Old Password").place(x=600,y=150)
-old_password_entry = Entry(root, show="*")
-old_password_entry.place(x=600,y=200)
+invo_label=Label(root,bg="white",relief="ridge",bd=5)  
+invo_label.place(x=700,y=80,height=660,width=500) 
 
-Label(root, text="New Password").place(x=600,y=250)
-new_password_entry = Entry(root, show="*")
-new_password_entry.place(x=600,y=300)
+heading_label=Label(invo_label,bg='white', text='Change Password',font=('cabiler',18,'bold'),fg='black')
+heading_label.place(x=100,y=20)
 
-Label(root, text="Confirm Password").place(x=600,y=350)
-confirm_password_entry = Entry(root, show="*")
-confirm_password_entry.place(x=600,y=400)
+email=Label(invo_label,text="Email",bg='white',font=('cabiler',12,'bold'),fg='sky blue')
+email.place(x=30,y=80)
 
-# Change Password Button
-Button(root, cursor='hand2', text="Change Password", command=change_password).place(x=600,y=500)
+email_entry=Entry(invo_label,width=40,fg='black',bg='white',font=("cabiler", 10, "bold"),bd=0)
+email_entry.place(x=40,y=120)
+
+Frame(invo_label,width=290,height=2,bg='black').place(x=30,y=140)  #####horizontal line to entry
+
+old_pass=Label(invo_label,text="Old Password",bg='white',font=('cabiler',12,'bold'),fg='sky blue')
+old_pass.place(x=30,y=170)
+
+old_password_entry=Entry(invo_label,width=25,fg='black',bg='white',font=("cabiler", 10, "bold"),bd=0 ,show='*')
+old_password_entry.place(x=40,y=210)
+    
+Frame(invo_label,width=290,height=2,bg='black').place(x=30,y=230)#####horizontal line to entry
+
+new_pass=Label(invo_label,text="New Password",bg='white',font=('cabiler',12,'bold'),fg='sky blue')
+new_pass.place(x=30,y=280)
+
+new_password_entry=Entry(invo_label,width=25,fg='black',bg='white',font=("cabiler", 10, "bold"),bd=0, show='*')
+new_password_entry.place(x=40,y=320)
+
+Frame(invo_label,width=290,height=2,bg='black').place(x=30,y=340)#####horizontal line to entry
+
+conf_pass=Label(invo_label,text="Confirm Password",bg='white',font=('cabiler',12,'bold'),fg='sky blue')
+conf_pass.place(x=30,y=390)
+
+confirm_password_entry=Entry(invo_label,width=25,fg='black',bg='white',font=("cabiler", 10, "bold"),bd=0, show='*')
+confirm_password_entry.place(x=40,y=430)
+
+Frame(invo_label,width=290,height=2,bg='black').place(x=30,y=450)#####horizontal line to entry
+    
+submit_button=Button(invo_label,text='Change Password',bd=0,bg='sky blue',fg='white',font=("cabiler", 16, "bold"),width=19,cursor='hand2',activebackground='black',activeforeground='sky blue',command=change_password)
+submit_button.place(x=70,y=550)
+    
+
 root.mainloop()
