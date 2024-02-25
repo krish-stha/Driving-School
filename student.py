@@ -141,7 +141,6 @@ def edit_record(event):
     item = tree.selection()[0]
     values = tree.item(item, "values")
     userId=values[0]
-    print(userId)
     global editor
     editor = Tk()
     editor.title("Update Data")
