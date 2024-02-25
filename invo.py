@@ -23,7 +23,7 @@ root.config(bg="white")
 image1 = Image.open("b.png")  
 photo1 = ImageTk.PhotoImage(image1)
 
-image_label=Button(root,image=photo1,bd=0,bg="white")
+image_label=Button(root,cursor='hand2',image=photo1,bd=0,bg="white")
 image_label.place(x=1420,y=10)
 
 
@@ -36,7 +36,7 @@ right_label.place(x=356,y=70)
 image2 = Image.open("real.png") 
 photo2 = ImageTk.PhotoImage(image2)
 
-search_button = Button(root, image=photo2,bg="white",bd=0,height=35,activebackground="white")
+search_button = Button(root,cursor='hand2', image=photo2,bg="white",bd=0,height=35,activebackground="white")
 search_button.place(x=525, y=15)
 
 placeholder = "Search Contacts"
@@ -50,15 +50,15 @@ entry.bind("<FocusOut>", lambda event: entry.insert(0, placeholder) if entry.get
 entry.config(fg='grey')  
 entry.place(x=370,y=22)
 
-home=Button(big_label,text="Home",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=home)
+home=Button(big_label,cursor='hand2',text="Home",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=home)
 home.place(x=40,y=500)
 
-student=Button(big_label,text="Student",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=std)
+student=Button(big_label,cursor='hand2',text="Student",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=std)
 student.place(x=40,y=560)
 
 
 
-invoice=Button(big_label,text="Invoice",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
+invoice=Button(big_label,cursor='hand2',text="Invoice",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
 invoice.place(x=40,y=620)
 
 

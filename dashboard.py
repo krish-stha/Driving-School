@@ -210,7 +210,7 @@ def form():
     category_box.place(x=600,y=270)
 
 
-    add_button=Button(window,text="Add",font=("arial rounded MT Bold",12,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=add)
+    add_button=Button(window,text="Add",cursor='hand2',font=("arial rounded MT Bold",12,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=add)
     add_button.place(x=350,y=320)
 
     root.mainloop()
@@ -249,11 +249,11 @@ no_of_closed_students=0
 image1 = Image.open("b.png")  
 photo1 = ImageTk.PhotoImage(image1)
 
-image_label=Button(root,image=photo1,bd=0,bg="white")
+image_label=Button(root,cursor='hand2',image=photo1,bd=0,bg="white")
 image_label.place(x=1420,y=10)
 
 
-add_student=Button(root,text="Add Student",bg="#3985FF",fg="white",height=2,width=15,activebackground="#3985FF",command=form)
+add_student=Button(root,cursor='hand2',text="Add Student",bg="#3985FF",fg="white",height=2,width=15,activebackground="#3985FF",command=form)
 add_student.place(x=370,y=15)
 
 
@@ -269,10 +269,10 @@ right_label.place(x=356,y=70)
 
 #LEFT LABEL
 
-home=Button(big_label,text="Home",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
+home=Button(big_label,cursor='hand2',text="Home",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
 home.place(x=40,y=500)
 
-student=Button(big_label,text="Student",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=std)
+student=Button(big_label,cursor='hand2',text="Student",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=std)
 student.place(x=40,y=560)
 
 def pay():
@@ -280,7 +280,7 @@ def pay():
     import invo
 
 
-invoice=Button(big_label,text="Invoice",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=pay)
+invoice=Button(big_label,cursor='hand2',text="Invoice",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=pay)
 invoice.place(x=40,y=620)
 
 
