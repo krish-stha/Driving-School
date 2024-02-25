@@ -5,23 +5,25 @@ from tkinter import ttk
 import sqlite3
 from datetime import datetime
 
-import sqlite3
-
-
-def home():
-    root.destroy()
-    import dashboard
-    
 root=Tk()
 root.geometry("1920x1080")
 root.title('Dashboard')
 root.config(bg="white")
+
+def home():
+    """
+    Function to return to the home/dashboard screen.
+
+    This function closes the current Tkinter window and imports the 'dashboard' module.
+    """
+    root.destroy()
+    import dashboard
+    
+
 image1 = Image.open("b.png")  
 photo1 = ImageTk.PhotoImage(image1)
-
 image_label=Button(root,image=photo1,cursor='hand2',bd=0,bg="white")
 image_label.place(x=1420,y=10)
-
 
 def search_students():
     # Get the search query from the entry widget
