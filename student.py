@@ -19,7 +19,7 @@ root.config(bg="white")
 image1 = Image.open("b.png")  
 photo1 = ImageTk.PhotoImage(image1)
 
-image_label=Button(root,image=photo1,bd=0,bg="white")
+image_label=Button(root,image=photo1,cursor='hand2',bd=0,bg="white")
 image_label.place(x=1420,y=10)
 
 
@@ -66,7 +66,7 @@ right_label=Label(root,height=50,width=170,bg="white")
 right_label.place(x=356,y=70)
 
 
-show_all_button = Button(right_label, text="Show All Data", bg="#3985FF", fg="white",height=2,width=15,activebackground="#3985FF", bd=0, font=("arial rounded MT Bold",12,"bold"), command=show_all_data)
+show_all_button = Button(right_label, text="Show All Data", bg="#3985FF",cursor='hand2', fg="white",height=2,width=15,activebackground="#3985FF", bd=0, font=("arial rounded MT Bold",12,"bold"), command=show_all_data)
 show_all_button.place(x=460, y=590)
 
 
@@ -74,7 +74,7 @@ show_all_button.place(x=460, y=590)
 image2 = Image.open("real.png") 
 photo2 = ImageTk.PhotoImage(image2)
 
-search_button = Button(root, image=photo2,bg="white",bd=0,height=35,activebackground="white",command=search_students)
+search_button = Button(root, image=photo2,bg="white",cursor='hand2',bd=0,height=35,activebackground="white",command=search_students)
 search_button.place(x=525, y=15)
 
 placeholder = "Search Contacts"
@@ -96,15 +96,15 @@ def payment():
     root.destroy()
     import invo
 
-home=Button(big_label,text="Home",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=home)
+home=Button(big_label,text="Home",cursor='hand2',font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=home)
 home.place(x=40,y=500)
 
-student=Button(big_label,text="Student",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
+student=Button(big_label,text="Student",cursor='hand2',font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
 student.place(x=40,y=560)
 
 
 
-invoice=Button(big_label,text="Invoice",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=payment)
+invoice=Button(big_label,text="Invoice",cursor='hand2',font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=payment)
 invoice.place(x=40,y=620)
 
 
@@ -336,13 +336,13 @@ def edit_record(event):
             
 
    
-    edit_button=Button(editor,text="Save",font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=update_data)
+    edit_button=Button(editor,text="Save",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=update_data)
     edit_button.place(x=340,y=310)
 
-    delete_button=Button(editor,text="Delete",font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=delete_record)
+    delete_button=Button(editor,text="Delete",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=delete_record)
     delete_button.place(x=50,y=320)
 
-    closed_button=Button(editor,text="Close",font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=closed_record)
+    closed_button=Button(editor,text="Close",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=closed_record)
     closed_button.place(x=660,y=320)
 
 
