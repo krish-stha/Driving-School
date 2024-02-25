@@ -26,6 +26,13 @@ image_label=Button(root,image=photo1,cursor='hand2',bd=0,bg="white")
 image_label.place(x=1420,y=10)
 
 def search_students():
+    """
+    Perform a search operation on student records based on the provided search query.
+
+    Retrieves the search query from the entry widget and searches for matching records in the 'usersData' table
+    of the 'dri.db' SQLite database. Clears the existing data in the Treeview widget and displays the search
+    results if any, otherwise displays an error message in case of database errors.
+    """
     # Get the search query from the entry widget
     search_query = entry.get()
 
@@ -55,11 +62,15 @@ def search_students():
         entry.delete(0, 'end')
 
 def show_all_data():
+    """
+    Clears the existing data in the Treeview widget and displays all records.
+
+    This function first clears any existing data in the Treeview widget named 'tree', 
+    and then calls the 'show_data()' function to display all records.
+    """
     for record in tree.get_children():
         tree.delete(record)
     show_data()
-
-
 
 big_label=Label(root,height=55,width=50,bg="#152844")
 big_label.place(x=0)
@@ -67,11 +78,8 @@ big_label.place(x=0)
 right_label=Label(root,height=50,width=170,bg="white")
 right_label.place(x=356,y=70)
 
-
 show_all_button = Button(right_label, text="Show All Data", bg="#3985FF",cursor='hand2', fg="white",height=2,width=15,activebackground="#3985FF", bd=0, font=("arial rounded MT Bold",12,"bold"), command=show_all_data)
 show_all_button.place(x=460, y=590)
-
-
 
 image2 = Image.open("real.png") 
 photo2 = ImageTk.PhotoImage(image2)
@@ -81,7 +89,6 @@ search_button.place(x=525, y=15)
 
 placeholder = "Search Contacts"
 
-
 entry =Entry( root,width=15, font=("cabiler", 14,"bold"),fg="black",bd=0)  
 
 entry.insert(0, placeholder)
@@ -90,11 +97,12 @@ entry.bind("<FocusOut>", lambda event: entry.insert(0, placeholder) if entry.get
 entry.config(fg='grey')  
 entry.place(x=370,y=22)
 
-
-
-#LEFT LABEL
-
 def payment():
+    """
+    Function to handle payment process.
+
+    Closes the Tkinter root window and imports the 'invo' module or script for payment processing.
+    """
     root.destroy()
     import invo
 
@@ -104,30 +112,32 @@ home.place(x=40,y=500)
 student=Button(big_label,text="Student",cursor='hand2',font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
 student.place(x=40,y=560)
 
-
-
 invoice=Button(big_label,text="Invoice",cursor='hand2',font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=payment)
 invoice.place(x=40,y=620)
 
-
-# stering image
 image = Image.open("drivelogo.png")  
 photo = ImageTk.PhotoImage(image)
-
 image_label=Label(big_label,image=photo,bg="#152844")
 image_label.place(x=17,y=10)
 
 pro=Label(big_label,text="Pro Driving Academy",font=("arial rounded MT bold",13,"bold"),fg="white",bg="#152844")
 pro.place(x=78,y=100)
 
-
-
-
-# image_button.place(x=505, y=35)
-
-
-#editing records
 def edit_record(event):
+    """
+    Function to edit a record from the database.
+
+    Retrieves the selected item from the Treeview widget 'tree', extracts its values, 
+    and opens a new Tkinter window for editing. The window contains entry fields 
+    pre-filled with the selected record's data. The user can modify the data and 
+    save changes to the database.
+
+    Args:
+    - event: The event object representing the action triggering the function (e.g., button click).
+
+    Returns:
+    None
+    """
     item = tree.selection()[0]
     values = tree.item(item, "values")
     userId=values[0]
@@ -151,23 +161,22 @@ def edit_record(event):
     global category_editor
     global zipCode_editor
     
-
     conn = sqlite3.connect("dri.db")
-    # db = conn.cursor() firstName_editor.insert(0, values[0])
-    # lastName_editor.insert(0, values[1])
-    # dob_editor.insert(0, values[2])
-    # email_edtior.insert(0, values[3])
 
     first_name = Label(editor,text="First Name",font=("arial rounded MT Bold",8)).place(x=10, y=50)
     firstName_editor = Entry(editor,width=40)
     firstName_editor.place(x=10, y=70)
+
     last_name = Label(editor,text="Last Name",font=("arial rounded MT Bold",8)).place(x=300, y=50)
     lastName_editor = Entry(editor,width=40)
     lastName_editor.place(x=300, y=70)
+
     date = Label(editor,text="D.O.B",font=("arial rounded MT Bold",8)).place(x=10, y=100)
     dob_editor = Entry(editor, width=40)
     dob_editor.place(x=10, y=120)
+
     instruction = Label(editor,text="Date must be in YYYY-MM-DD[2012-12-22]format",font=("arial rounded MT Bold",7)).place(x=10, y=140)
+
     Client_id = Label(editor,text="Client id",font=("arial rounded MT Bold",8)).place(x=300, y=100)
     clientId_editor = Entry(editor,width=40)
     clientId_editor.place(x=300, y=120)
@@ -175,17 +184,19 @@ def edit_record(event):
     email = Label(editor,text="Email",font=("arial rounded MT Bold",8)).place(x=600,y=50)
     email_editor = Entry(editor,width=40)
     email_editor.place(x=600, y=70)
+
     phone = Label(editor,text="Phone",font=("arial rounded MT Bold",8)).place(x=600,y=100)
     number_editor = Entry(editor,width=40)
     number_editor.place(x=600, y=120)
-
 
     street = Label(editor,text="Street",font=("arial rounded MT Bold",8)).place(x=10,y=180)
     street_editor = Entry(editor,width=40)
     street_editor.place(x=10, y=200)
     city = Label(editor,text="City",font=("arial rounded MT Bold",8)).place(x=300,y=180)
+
     city_editor = Entry(editor,width=40)
     city_editor.place(x=300, y=200)
+
     state = Label(editor,text="State",font=("arial rounded MT Bold",8)).place(x=600,y=180)
     state_editor = Entry(editor,width=40)
     state_editor.place(x=600, y=200)
@@ -193,17 +204,15 @@ def edit_record(event):
     zip = Label(editor,text="Zip/Post Code",font=("arial rounded MT Bold",8)).place(x=10,y=250)
     zip_editor = Entry(editor,width=40)
     zip_editor.place(x=10, y=270)
+
     country = Label(editor,text="Country",font=("arial rounded MT Bold",8)).place(x=300,y=250)
     country_editor = Entry(editor,width=40)
     country_editor.place(x=300, y=270)
+
     category=Label(editor,text="Category",font=("arial rounded MT Bold",8)).place(x=600,y=250)
     category_editor = Entry(editor,width=40)
     category_editor.place(x=600,y=270)
 
-    
-
-
-    
     #defaultValuesOnEdit
     firstName_editor.insert(0, values[1])
     lastName_editor.insert(0, values[2])
@@ -218,68 +227,52 @@ def edit_record(event):
     category_editor.insert(0, values[11])
     zip_editor.insert(0, values[12])
     
-    
-      
-    
-    
     #update function
     def update_data():
-        
-        
+        """
+    Function to update data in the database.
 
-
-        
-
+    This function validates the entered data and updates the corresponding record in the database.
+    If all checks pass, the function updates the record in the database, displays a success message,
+    closes the editor window, clears the Treeview widget, and shows updated data.
+    """
         # Check if any required field is empty
         if (firstName_editor.get() == '' or lastName_editor.get() == '' or clientId_editor.get() =='' or dob_editor.get() == '' or email_editor.get() == '' or number_editor.get() == '' or zip_editor.get() == '' or country_editor.get() == ''):
             messagebox.showerror('Error', 'All Fields Are Required.', parent=editor)
             return
-
-        # Check if first name and last name contain only alphabets
-        if not firstName_editor.get().isalpha() or not lastName_editor.get().isalpha():
+       
+        if not firstName_editor.get().isalpha() or not lastName_editor.get().isalpha(): # Check if first name and last name contain only alphabets
             messagebox.showerror('Error', 'First name and last name should contain only alphabets.', parent=editor)
             return
 
          # Check if date is in the correct format and the person is above 16 years old
-
-
         try:
             birth_date = datetime.strptime(dob_editor.get(), '%Y-%m-%d')
         except ValueError:
             messagebox.showerror('Error', 'Date must be in YYYY-MM-DD format.', parent=editor)
             return
-
         # Get current date
         current_date = datetime.now()
-
         # Adjust current date if the birth date is in the future
         if birth_date > current_date:
             birth_date = birth_date.replace(year=birth_date.year - 100)  # Subtract 100 years
-
         # Calculate age
         age = current_date.year - birth_date.year - ((current_date.month, current_date.day) < (birth_date.month, birth_date.day))
-
         # Check if age is below 16
         if age < 16:
             messagebox.showerror('Error', 'Age must be 16 years or older to be registered.', parent=editor)
             return
-
-
         # Check if email ends with '@gmail.com'
         if not email_editor.get().lower().endswith('@gmail.com'):
             messagebox.showerror('Error', 'Email must end with @gmail.com.', parent=editor)
             return
-
         # Check if phone number is a digit and has 10 digits
         if not number_editor.get().isdigit() or len(number_editor.get()) != 10:
             messagebox.showerror('Error', 'Phone number must be a 10-digit number.', parent=editor)
             return
-        
         else:
-
             conn = sqlite3.connect("dri.db")
             db = conn.cursor()
-
             db.execute(
                 """
             UPDATE usersData
@@ -311,9 +304,14 @@ def edit_record(event):
                 tree.delete(row)
             show_data()
 
-
-
     def delete_record():
+        """
+    Function to delete a record from the database.
+
+    This function first checks if a record is selected in the Treeview widget 'tree'. If no record is selected, it displays a warning.
+    If a record is selected, it asks for confirmation before proceeding with the deletion. If confirmed, it deletes the selected record
+    from the 'usersData' table in the 'dri.db' SQLite database and removes it from the Treeview widget.
+    """
         selected_item = tree.selection()
         if not selected_item:
             messagebox.showwarning("Warning", "Please select a record to delete.")
@@ -331,13 +329,15 @@ def edit_record(event):
             conn.commit()
             conn.close()
             tree.delete(item)
-
     
     def closed_record():
+        """
+    Function to close the editor window.
+
+    This function destroys the Tkinter window named 'editor'.
+    """
         editor.destroy()
             
-
-   
     edit_button=Button(editor,text="Save",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=update_data)
     edit_button.place(x=340,y=310)
 
@@ -348,8 +348,14 @@ def edit_record(event):
     closed_button.place(x=660,y=320)
 
 
-#show data
+
 def show_data():
+    """
+    Function to display data from the 'usersData' table in the Treeview widget.
+
+    This function retrieves all records from the 'usersData' table in the 'dri.db' SQLite database,
+    inserts each record into the Treeview widget 'tree', and then closes the database connection.
+    """
     conn = sqlite3.connect("dri.db")
     cursor = conn.cursor()
 
@@ -360,7 +366,6 @@ def show_data():
         tree.insert("", END, values=row)
 
     conn.close()
-
 
 tree = ttk.Treeview(root, columns=("ID", "First Name", "Last Name", "DOB", "Client ID", "Email", "Number", "Street", "City", "State", "Country", "Category", "Zip Code"), show="headings",height=25)
 tree.place(x=370,y=120)
@@ -392,7 +397,6 @@ tree.column("State",width=70)
 tree.column("Country", width=90)
 tree.column("Category", width=70)
 tree.column("Zip Code", width=70)
-
 
 show_data()
 
