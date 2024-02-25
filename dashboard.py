@@ -322,7 +322,7 @@ def setting():
     and then imports the 'invo' module .
     """
     root.destroy()
-    import setting
+    import invo
 
 
 setting=Button(big_label,cursor='hand2',text="Setting",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=setting)

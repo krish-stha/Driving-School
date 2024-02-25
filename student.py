@@ -129,7 +129,7 @@ home.place(x=40,y=500)
 student=Button(big_label,text="Student",cursor='hand2',font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
 student.place(x=40,y=560)
 
-invoice=Button(big_label,text="Invoice",cursor='hand2',font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=payment)
+invoice=Button(big_label,text="Setting",cursor='hand2',font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=payment)
 invoice.place(x=40,y=620)
 
 image = Image.open("drivelogo.png")  
