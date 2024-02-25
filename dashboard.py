@@ -275,8 +275,12 @@ home.place(x=40,y=500)
 student=Button(big_label,text="Student",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=std)
 student.place(x=40,y=560)
 
+def pay():
+    root.destroy()
+    import invo
 
-invoice=Button(big_label,text="Invoice",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
+
+invoice=Button(big_label,text="Invoice",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=pay)
 invoice.place(x=40,y=620)
 
 
