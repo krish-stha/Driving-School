@@ -74,6 +74,8 @@ pro=Label(big_label,text="Pro Driving Academy",font=("arial rounded MT bold",13,
 pro.place(x=78,y=100)
 
 
+
+
 # image_button.place(x=505, y=35)
 
 
@@ -261,16 +263,36 @@ def edit_record(event):
             for row in tree.get_children():
                 tree.delete(row)
             show_data()
+
+
+    def delete_record():
+        selected_item = tree.selection()
+        if not selected_item:
+            messagebox.showwarning("Warning", "Please select a record to delete.")
+            return
+
+        for item in selected_item:
+            item_id = tree.item(item, "values")[0]
+            conn = sqlite3.connect("dri.db")
+            cursor = conn.cursor()
+            cursor.execute("DELETE FROM usersData WHERE usersId=?", (item_id,))
+            conn.commit()
+            conn.close()
+            tree.delete(item)
+        editor.destroy()
+    
+    def closed_record():
+        editor.destroy()
             
 
    
     edit_button=Button(editor,text="Save",font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=update_data)
     edit_button.place(x=340,y=310)
 
-    delete_button=Button(editor,text="Delete",font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=update_data)
+    delete_button=Button(editor,text="Delete",font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=delete_record)
     delete_button.place(x=50,y=320)
 
-    closed_button=Button(editor,text="Close",font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=update_data)
+    closed_button=Button(editor,text="Close",font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=closed_record)
     closed_button.place(x=660,y=320)
 
 
@@ -324,3 +346,12 @@ show_data()
 
 tree.bind("<Double-1>", edit_record)
 root.mainloop()
+
+
+
+
+
+
+
+###################above orginal
+

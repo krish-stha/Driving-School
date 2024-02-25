@@ -115,6 +115,7 @@ def form():
                 db.close()
                 conn.close()
                 retrieve()
+                get_record_count()
 
     def retrieve():
         try:
@@ -132,10 +133,6 @@ def form():
         finally:
             db.close()
             conn.close()
-
-
-   
-    #connecting to database
     conn = sqlite3.connect("dri.db")
     db = conn.cursor()
     db.execute("""CREATE TABLE IF NOT EXISTS usersData(
@@ -156,6 +153,16 @@ def form():
     conn.commit()
     conn.close()
     retrieve()
+
+
+            
+
+  
+
+
+   
+    #connecting to database
+ 
     
     # Personal details 
     personal = Label(window,text="PERSONAL DETAILS",border=5,font=("arial rounded MT Bold",10,"bold"),fg="#3985FF").place(x=10, y=10)
@@ -208,8 +215,27 @@ def form():
 
     root.mainloop()
 
+def get_record_count():
+        global no_of_inquiry
+        global no_of_ongoing_students
+        no_of_inquiry=""
+        conn = sqlite3.connect("dri.db")
+        cursor = conn.cursor()
 
-# document section
+        cursor.execute("SELECT COUNT(*) FROM usersData")
+        count = cursor.fetchone()[0]
+
+        conn.close()
+        print(count)
+        
+
+        return count
+
+no_of_inquiry=get_record_count()
+no_of_ongoing_students=no_of_inquiry
+no_of_closed_students=0
+
+# # document section
     
 
 
@@ -218,7 +244,7 @@ def form():
    
 
 
-# root element
+# # root element
 
 image1 = Image.open("b.png")  
 photo1 = ImageTk.PhotoImage(image1)
@@ -273,20 +299,29 @@ invoice.place(x=40,y=620)
 
 ##### 3 box
 
+
+# ##### 3 box
+
 inquiry=Label(right_label, height=20, width=45, relief="sunken",bg="white",bd=3)
 inquiry.place(x=50, y=220)
+
+inquriy_number=Label(right_label,text=no_of_inquiry,font=("Arial", 40))
+inquriy_number.place(x=180,y=350)
 
 inquiry_text=Label(right_label, height=5, width=46,text="Number Of Inquiry",fg="white",font=("arial rounded MT Bold",8), relief="ridge",bg="#3985FF")
 inquiry_text.place(x=50, y=520)
 
 ongoing=Label(right_label, height=20, width=45, bg="white",relief="sunken", bd=3)
 ongoing.place(x=430, y=220)
-
+ongoing_number=Label(right_label,text=no_of_ongoing_students,font=("Arial", 40))
+ongoing_number.place(x=560,y=350)
 ongoing_text=Label(right_label, height=5, text="Number Of Ongoing Student",fg="white",font=("arial rounded MT Bold",8),width=46, bg="#3985FF", bd=1, relief="ridge")
 ongoing_text.place(x=430, y=520)
 
 closed=Label(right_label, height=20, width=45,bg="white",relief="sunken", bd=3)
 closed.place(x=800, y=220)
+closed_number=Label(right_label,text=no_of_closed_students,font=("Arial", 40))
+closed_number.place(x=930,y=350)
 
 closed_text=Label(right_label, height=5,text="Number Of Closed Student",fg="white",font=("arial rounded MT Bold",8), width=46, bg="#3985FF", bd=1, relief="ridge")
 closed_text.place(x=800, y=520)
@@ -322,5 +357,4 @@ root.mainloop()
 
 
 
-##############above orginal
-
+#########above orginal
