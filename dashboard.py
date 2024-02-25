@@ -1,3 +1,4 @@
+
 from tkinter import *
 from PIL import Image, ImageTk
 from tkinter import messagebox
@@ -273,10 +274,27 @@ no_of_closed_students=0
 
 # # dashboard UI##
 
-image1 = Image.open("b.png")  
-photo1 = ImageTk.PhotoImage(image1)
-image_label=Button(root,cursor='hand2',image=photo1,bd=0,bg="white")
-image_label.place(x=1420,y=10)
+def signOut():
+    root.destroy()
+    import login
+
+def show_user_menu(event):
+    user_menu.post(event.x_root, event.y_root)
+
+profile_image = PhotoImage(file="b.png")
+
+# Create a profile icon button with the image
+profile_icon_button = Button(root, cursor='hand2', image=profile_image, bd=0, bg="white", width=32, height=32)
+profile_icon_button.place(x=1420, y=10)
+
+# Create a menu for the user
+user_menu = Menu(root, tearoff=0, bg="lightgray", fg="black", font=("Helvetica", 10, "bold"))
+user_menu.add_command(label="Sanjeev Manandhar", font=("Helvetica", 10), command=lambda: print("User clicked"))
+user_menu.add_separator()
+user_menu.add_command(label="Sign out", font=("Helvetica", 10, "bold"), command=signOut)
+
+# Bind the menu to the profile icon button
+profile_icon_button.bind("<Button-1>", show_user_menu)
 
 add_student=Button(root,cursor='hand2',text="Add Student",bg="#3985FF",fg="white",height=2,width=15,activebackground="#3985FF",command=form)
 add_student.place(x=370,y=15)
@@ -295,7 +313,7 @@ home.place(x=40,y=500)
 student=Button(big_label,cursor='hand2',text="Student",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=std)
 student.place(x=40,y=560)
 
-def pay():
+def setting():
     
     """
     Function to handle payment process.
@@ -304,11 +322,11 @@ def pay():
     and then imports the 'invo' module .
     """
     root.destroy()
-    import invo
+    import setting
 
 
-invoice=Button(big_label,cursor='hand2',text="Invoice",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=pay)
-invoice.place(x=40,y=620)
+setting=Button(big_label,cursor='hand2',text="Setting",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=setting)
+setting.place(x=40,y=620)
 
 ##### 3 box ####
 
