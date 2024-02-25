@@ -256,11 +256,6 @@ image_label.place(x=1420,y=10)
 add_student=Button(root,text="Add Student",bg="#3985FF",fg="white",height=2,width=15,activebackground="#3985FF",command=form)
 add_student.place(x=370,y=15)
 
-image2 = Image.open("real.png")  
-photo2 = ImageTk.PhotoImage(image2)
-
-search_button = Button(root, image=photo2,bg="white",bd=0,height=35)
-search_button.place(x=487, y=15)
 
 big_label=Label(root,height=55,width=50,bg="#152844")
 big_label.place(x=0)
@@ -268,18 +263,7 @@ big_label.place(x=0)
 right_label=Label(root,height=50,width=170,bg="white")
 right_label.place(x=356,y=70)
 
-placeholder = "Search Contacts"
 
-
-entry =Entry( root,width=25, font=("cabiler", 14,"bold"),fg="black",bd=0)  
-
-entry.insert(0, placeholder)
-entry.bind("<FocusIn>", lambda event: entry.delete(0, END) if entry.get() == placeholder else None)
-entry.bind("<FocusOut>", lambda event: entry.insert(0, placeholder) if entry.get() == "" else None)
-entry.config(fg='grey')  # Change text color to grey
-
-
-entry.place(x=535,y=22)
 
 
 
@@ -305,7 +289,7 @@ invoice.place(x=40,y=620)
 inquiry=Label(right_label, height=20, width=45, relief="sunken",bg="white",bd=3)
 inquiry.place(x=50, y=220)
 
-inquriy_number=Label(right_label,text=no_of_inquiry,font=("Arial", 40))
+inquriy_number=Label(right_label,text=no_of_inquiry,font=("Arial", 40),bd=0,bg="white")
 inquriy_number.place(x=180,y=350)
 
 inquiry_text=Label(right_label, height=5, width=46,text="Number Of Inquiry",fg="white",font=("arial rounded MT Bold",8), relief="ridge",bg="#3985FF")
@@ -313,14 +297,14 @@ inquiry_text.place(x=50, y=520)
 
 ongoing=Label(right_label, height=20, width=45, bg="white",relief="sunken", bd=3)
 ongoing.place(x=430, y=220)
-ongoing_number=Label(right_label,text=no_of_ongoing_students,font=("Arial", 40))
+ongoing_number=Label(right_label,text=no_of_ongoing_students,font=("Arial", 40),bd=0,bg="white")
 ongoing_number.place(x=560,y=350)
 ongoing_text=Label(right_label, height=5, text="Number Of Ongoing Student",fg="white",font=("arial rounded MT Bold",8),width=46, bg="#3985FF", bd=1, relief="ridge")
 ongoing_text.place(x=430, y=520)
 
 closed=Label(right_label, height=20, width=45,bg="white",relief="sunken", bd=3)
 closed.place(x=800, y=220)
-closed_number=Label(right_label,text=no_of_closed_students,font=("Arial", 40))
+closed_number=Label(right_label,text=no_of_closed_students,font=("Arial", 40),bd=0,bg="white")
 closed_number.place(x=930,y=350)
 
 closed_text=Label(right_label, height=5,text="Number Of Closed Student",fg="white",font=("arial rounded MT Bold",8), width=46, bg="#3985FF", bd=1, relief="ridge")
