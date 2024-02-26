@@ -145,8 +145,8 @@ home_photo = ImageTk.PhotoImage(home_image)
 home_image_label=Label(big_label,image=home_photo,bg="#152844")
 home_image_label.place(x=17,y=495)
 
-home=Button(big_label,cursor='hand2',text="Home",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=home)
-home.place(x=60,y=500)
+home1=Button(big_label,cursor='hand2',text="Home",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=home)
+home1.place(x=60,y=500)
 
 student_image = Image.open("student_icon.png")  
 student_photo = ImageTk.PhotoImage(student_image)
