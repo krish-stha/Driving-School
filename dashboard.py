@@ -31,7 +31,6 @@ db.execute("""CREATE TABLE IF NOT EXISTS usersTable(
 conn.commit()
 conn.close()
   
-
 def std():
     """
     Closes the current root window and opens the student window.
@@ -45,8 +44,6 @@ def std():
     """
     root.destroy()
     import student
-
-
 
 def form():
     """
@@ -65,16 +62,15 @@ def form():
     window.title('Details')
     window.geometry(f'860x400+450+195')
     
-
     def add():
 
         """
     Adds user details to the database after validation.
 
-    This function retrieves user-entered data from the entry fields,
-    validates the input, including ensuring all fields are filled,
-    correct date format, age above 16, email ends with '@gmail.com',
-    valid phone number, and then inserts the data into the SQLite database.
+    Retrieves user-entered data from the entry fields, validates the input,
+    including ensuring all fields are filled, correct date format, age above 16,
+    email ends with '@gmail.com', valid phone number, and then inserts the data
+    into the SQLite database.
 
     Returns:
         None
@@ -92,9 +88,6 @@ def form():
         zip_value=zip_box.get()  
         category_value=category_box.get()
         user_status="active"
-
-
-        
 
         # Check if any required field is empty
         if (first_name_value == '' or last_name_value == '' or client_id_value =='' or date_value == '' or email_value == '' or phone_value == '' or street_value == '' or category_value=='' or city_value== '' or state_value == '' or zip_value == '' or country_value == ''):
@@ -114,7 +107,8 @@ def form():
         except ValueError:
             messagebox.showerror('Error', 'Date must be in YYYY-MM-DD format.', parent=window)
             return
-# Get current date
+        
+        # Get current date
         current_date = datetime.now()
 
         # Adjust current date if the birth date is in the future
@@ -129,8 +123,7 @@ def form():
             messagebox.showerror('Error', 'Age must be 16 years or older to be registered.', parent=window)
             return
 
-
-        # Check if email ends with '@gmail.com'
+       # Check if email ends with '@gmail.com'
         if not email_value.lower().endswith('@gmail.com'):
             messagebox.showerror('Error', 'Email must end with @gmail.com.', parent=window)
             return
@@ -161,9 +154,17 @@ def form():
                 retrieve()
                 # get_record_count()
 
+            totalRecords = get_record_count()
+            no_of_ongoing_students = get_active_record_count()
+            no_of_closed_students = get_closed_record_count()
+
+            inquriy_number.config(text=f'00{totalRecords}')
+            ongoing_number.config(text=f'00{no_of_ongoing_students}')
+            closed_number.config(text=f'00{no_of_closed_students}')
+
     def retrieve():
         """
-    Retrieves user records from the database.
+    Find user records from the database.
 
     This function queries the SQLite database to retrieve all user records
     and prints them to the console.
@@ -186,7 +187,6 @@ def form():
         finally:
             db.close()
             conn.close()
-  
 
     ##########Personal details UI ######
 
@@ -247,6 +247,15 @@ def form():
     root.mainloop()
 
 def get_record_count():
+        """
+    Get the total count of records in the database.
+
+    This function connects to the 'dri.db' database and queries the 'usersTable'
+    to count the total number of records. It then returns this count.
+
+    Returns:
+        int: The total count of records in the database.
+    """
         global no_of_inquiry
         global no_of_ongoing_students
         no_of_inquiry=""
@@ -257,10 +266,19 @@ def get_record_count():
         count = cursor.fetchone()[0]
 
         conn.close()
-        
         return count
     
 def get_active_record_count():
+        """
+    Bring the count of records in the database that are active.
+
+    This function connects to the 'dri.db' database and queries the 'usersTable'
+    to count the number of records where the status is 'active'. It then returns
+    this count.
+
+    Returns:
+        int: The count of active records in the database.
+    """
         global no_of_inquiry
         global no_of_ongoing_students
         no_of_inquiry=""
@@ -269,14 +287,20 @@ def get_active_record_count():
 
         cursor.execute("SELECT COUNT(*) FROM usersTable WHERE status = 'active'")
         count = cursor.fetchone()[0]
-
         conn.close()
-        
-        
-
         return count
     
 def get_closed_record_count():
+        """
+    fetch the count of records in the database that are not active.
+
+    This function connects to the 'dri.db' database and queries the 'usersTable'
+    to count the number of records where the status is not 'active'. It then returns
+    this count.
+
+    Returns:
+        int: The count of closed records in the database.
+    """
         global no_of_inquiry
         global no_of_ongoing_students
         no_of_inquiry=""
@@ -285,27 +309,35 @@ def get_closed_record_count():
 
         cursor.execute("SELECT COUNT(*) FROM usersTable WHERE status != 'active'")
         count = cursor.fetchone()[0]
-
         conn.close()
-       
-        
 
         return count
-
-    
 
 totalRecords=get_record_count()
 no_of_ongoing_students=get_active_record_count()
 no_of_closed_students=get_closed_record_count()
 
-
 # # dashboard UI##
 
 def signOut():
+    """
+    Closes the current window and navigates to the login page.
+
+    This function closes the current Tkinter window (root) and then imports
+    the login module to navigate to the login page.
+
+    Returns:
+        None
+    """
     root.destroy()
     import login
 
 def show_user_menu(event):
+    """
+    Displays the user menu at the specified coordinates.
+
+    This function displays the user menu at the specified coordinates (event.x_root, event.y_root).
+    """
     user_menu.post(event.x_root, event.y_root)
 
 profile_image = PhotoImage(file="b.png")
@@ -375,8 +407,6 @@ ongoing_number.place(x=560,y=350)
 
 ongoing_text=Label(right_label, height=5, text="Number Of Ongoing Student",fg="white",font=("arial rounded MT Bold",8),width=46, bg="#3985FF", bd=1, relief="ridge")
 ongoing_text.place(x=430, y=520)
-
-
 
 closed=Label(right_label, height=20, width=45,bg="white",relief="sunken", bd=3)
 closed.place(x=800, y=220)

@@ -10,6 +10,7 @@ root.geometry("1920x1080")
 root.title('Dashboard')
 root.config(bg="white")
 category_value=""
+
 def home():
     """
     Function to return to the home/dashboard screen.
@@ -19,12 +20,31 @@ def home():
     root.destroy()
     import dashboard
     
-
 def signOut():
+    """
+    Closes the current window and navigates to the login page.
+
+    This function closes the current Tkinter window (root) and then imports
+    the login module to navigate to the login page.
+
+    Returns:
+        None
+    """
     root.destroy()
     import login
 
 def show_user_menu(event):
+    """
+    Displays the user menu at the specified coordinates.
+
+    This function displays the user menu at the specified coordinates (event.x_root, event.y_root).
+
+    Args:
+        event (Tkinter.Event): The event that triggered the menu display.
+
+    Returns:
+        None
+    """
     user_menu.post(event.x_root, event.y_root)
 
 profile_image = PhotoImage(file="b.png")
@@ -50,15 +70,12 @@ def search_students():
     of the 'dri.db' SQLite database. Clears the existing data in the Treeview widget and displays the search
     results if any, otherwise displays an error message in case of database errors.
     """
-    # Get the search query from the entry widget
-    search_query = entry.get()
+    search_query = entry.get() # Get the search query from the entry widget
 
-    # Clear existing data in the Treeview
-    for record in tree.get_children():
+    for record in tree.get_children(): # Clear existing data in the Treeview
         tree.delete(record)
 
-    # Perform the search operation in your database
-    try:
+    try: # Perform the search operation in your database
         conn = sqlite3.connect("dri.db")
         db = conn.cursor()
 
@@ -178,7 +195,6 @@ def edit_record(event):
     global zipCode_editor
     global category_value
 
-    
     conn = sqlite3.connect("dri.db")
 
     first_name = Label(editor,text="First Name",font=("arial rounded MT Bold",8)).place(x=10, y=50)
@@ -245,9 +261,8 @@ def edit_record(event):
     category_editor.insert(0, values[11])
     zip_editor.insert(0, values[12])
     
-    
     category_value=values[11]
-   
+
     #update function
     def update_data():
         """
@@ -316,7 +331,6 @@ def edit_record(event):
                     userId,
                 ),
             )
-
             conn.commit()
             conn.close()
             messagebox.showinfo("Success","Added  Successfully")
@@ -327,11 +341,11 @@ def edit_record(event):
 
     def delete_record():
         """
-    Function to delete a record from the database.
+            Function to delete a record from the database.
 
-    This function first checks if a record is selected in the Treeview widget 'tree'. If no record is selected, it displays a warning.
-    If a record is selected, it asks for confirmation before proceeding with the deletion. If confirmed, it deletes the selected record
-    from the 'usersTable' table in the 'dri.db' SQLite database and removes it from the Treeview widget.
+            This function first checks if a record is selected in the Treeview widget 'tree'. If no record is selected, it displays a warning.
+            If a record is selected, it asks for confirmation before proceeding with the deletion. If confirmed, it deletes the selected record
+            from the 'usersTable' table in the 'dri.db' SQLite database and removes it from the Treeview widget.
     """
         selected_item = tree.selection()
         if not selected_item:
@@ -354,24 +368,25 @@ def edit_record(event):
     def generate_bill():
         def closed_record():
           """
-    Function to close the editor window.
-    This function destroys the Tkinter window named 'editor'.
+            Function to close the editor window.
+            This function destroys the Tkinter window named 'editor'.
           """
           conn = sqlite3.connect("dri.db")
           cursor = conn.cursor()
           cursor.execute("UPDATE usersTable SET status = 'closed' WHERE usersId = ?", (userId,))
           conn.commit()
           conn.close()  
+
           for record in tree.get_children():
             tree.delete(record)
           show_data()
-          
           bill_window.destroy()
           editor.destroy()
 
         selected_item = tree.selection()
         if not selected_item:
             messagebox.showwarning("Warning", "Please select a record to generate bill.")
+
             return
 
         item_values = tree.item(selected_item[0], "values")
@@ -379,24 +394,23 @@ def edit_record(event):
         start_date = datetime.strptime(start_date_str, "%Y-%m-%d")
         end_date = datetime.now()
         days_rented = (end_date - start_date).days
+
         if category_value.capitalize() == "Bike":
                 price_per_day = 450
+
         elif category_value.capitalize() == "Scooter":
                 price_per_day = 350
+
         elif category_value.capitalize() == "Car":
                 price_per_day = 700
     
         total_payment = days_rented * price_per_day
-       
-
         bill_window = Toplevel(root)
         bill_window.title("Bill")
         bill_window.geometry("300x400+1240+195")
      
-
         big_label = Label(bill_window, text="Payment Receipt", font=("cabiler", 19, "bold"),fg='sky blue')
         big_label.place(x=45, y=10)
-
 
         # Customer details
         Label(bill_window, text="Name:",font=("arial rounded MT Bold",10)).place(x=25, y=70)
@@ -425,8 +439,6 @@ def edit_record(event):
 
         closed_button=Button(bill_window,text="Pay",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white",command=closed_record)
         closed_button.place(x=65,y=320)
-
-
             
     edit_button=Button(editor,text="Save",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white",command=update_data)
     edit_button.place(x=360,y=320)
@@ -437,9 +449,9 @@ def edit_record(event):
     Label(editor, text="Start Date",font=("arial rounded MT Bold",8)).place(x=600,y=310)
     start_date_entry = Entry(editor,width=23)
     start_date_entry.place(x=660,y=310)
+
     bill_button = Button(editor, text="Generate Bill",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white" ,command=generate_bill)
     bill_button.place(x=660, y=340)
-
 
 def show_data():
     """
@@ -450,13 +462,11 @@ def show_data():
     """
     conn = sqlite3.connect("dri.db")
     cursor = conn.cursor()
-
     cursor.execute("SELECT * FROM usersTable")
     rows = cursor.fetchall()
 
     for row in rows:
         tree.insert("", END, values=row)
-
     conn.close()
 
 tree = ttk.Treeview(root, columns=("ID", "First Name", "Last Name", "DOB", "Client ID", "Email", "Number", "Street", "City", "State", "Country", "Category", "Zip Code","Status"), show="headings",height=25)

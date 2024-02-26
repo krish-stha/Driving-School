@@ -5,33 +5,65 @@ from tkinter import ttk
 import sqlite3
 from datetime import datetime
 
-import sqlite3
-
 root=Tk()
 root.geometry("1920x1080")
 root.title('Dashboard')
 root.config(bg="white")
 
-
-
 def home():
+    """
+    Closes the current window and navigates to the dashboard.
+
+    This function closes the current Tkinter window (root) and then imports
+    the dashboard module to navigate to the dashboard page.
+
+    Returns:
+        None
+    """
     root.destroy()
     import dashboard
 
 def std():
+    """
+    Closes the current window and navigates to the student page.
+
+    This function closes the current Tkinter window (root) and then imports
+    the student module to navigate to the student page.
+
+    Returns:
+        None
+    """
     root.destroy()
     import student
 
-
 def signOut():
+    """
+    Closes the current window and navigates to the login page.
+
+    This function closes the current Tkinter window (root) and then imports
+    the login module to navigate to the login page.
+
+    Returns:
+        None
+    """
     root.destroy()
     import login
 
 def show_user_menu(event):
+    """
+    Displays the user menu at the specified coordinates.
+
+    This function displays the user menu at the specified coordinates (event.x_root, event.y_root).
+
+    Args:
+        event (Tkinter.Event): The event that triggered the menu display.
+
+    Returns:
+        None
+    """
     user_menu.post(event.x_root, event.y_root)
 
 profile_image = PhotoImage(file="b.png")
-
 # Create a profile icon button with the image
 profile_icon_button = Button(root, cursor='hand2', image=profile_image, bd=0, bg="white", width=32, height=32)
 profile_icon_button.place(x=1420, y=10)
@@ -45,16 +77,11 @@ user_menu.add_command(label="Sign out", font=("Helvetica", 10, "bold"), command=
 # Bind the menu to the profile icon button
 profile_icon_button.bind("<Button-1>", show_user_menu)
     
-
-
-
 big_label=Label(root,height=55,width=50,bg="#152844")
 big_label.place(x=0)
 
 right_label=Label(root,height=50,width=170,bg="white")
 right_label.place(x=356,y=70)
-
-
 
 home=Button(big_label,cursor='hand2',text="Home",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=home)
 home.place(x=40,y=500)
@@ -62,11 +89,8 @@ home.place(x=40,y=500)
 student=Button(big_label,cursor='hand2',text="Student",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=std)
 student.place(x=40,y=560)
 
-
-
 invoice=Button(big_label,cursor='hand2',text="Setting",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
 invoice.place(x=40,y=620)
-
 
 # stering image
 image = Image.open("drivelogo.png")  
@@ -79,6 +103,17 @@ pro=Label(big_label,text="Pro Driving Academy",font=("arial rounded MT bold",13,
 pro.place(x=78,y=100)
 
 def change_password():
+    """
+    Changes the password for the user.
+
+    This function gets the email, old password, new password, and confirm password from the entry fields,
+    validates the input, including ensuring that the new password matches the confirm password,
+    checks if the email exists in the database, verifies the old password, updates the password in the database,
+    and shows a success message. If any validation fails, it displays an error message.
+
+    Returns:
+        None
+    """
     email = email_entry.get()
     old_password = old_password_entry.get()
     new_password = new_password_entry.get()
@@ -86,8 +121,9 @@ def change_password():
 
     if new_password != confirm_password:
         messagebox.showerror("Error", "New password and confirm password do not match")
-        return
 
+        return
+    
     conn = sqlite3.connect('dri.db')
     cursor = conn.cursor()
 
@@ -117,9 +153,6 @@ def change_password():
     old_password_entry.delete(0, END)
     new_password_entry.delete(0, END)
     confirm_password_entry.delete(0, END)
-
-
-
 
 # Labels
 
@@ -164,5 +197,7 @@ Frame(invo_label,width=290,height=2,bg='black').place(x=30,y=450)#####horizontal
 submit_button=Button(invo_label,text='Change Password',bd=0,bg='sky blue',fg='white',font=("cabiler", 16, "bold"),width=19,cursor='hand2',activebackground='black',activeforeground='sky blue',command=change_password)
 submit_button.place(x=70,y=550)
     
-
 root.mainloop()
+
+
+################END####################

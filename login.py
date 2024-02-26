@@ -119,9 +119,7 @@ def forget_password():
         new_pass_entry.delete(0, 'end')
         
         conf_pass_entry.delete(0, 'end')
-    
-                
-        
+      
 ###top level window start
     window=Toplevel()
     window.config(bg='black')
@@ -158,15 +156,8 @@ def forget_password():
     submit_button=Button(window,text='Change Password',bd=0,bg='sky blue',fg='white',font=("cabiler", 16, "bold"),width=19,cursor='hand2',activebackground='black',activeforeground='sky blue',command=change_pass)
     submit_button.place(x=55,y=320)
     
-    
-    
-    window.mainloop()
-          
-
-
-    
+    window.mainloop() 
    
-    
 def login():
     """
     Closes the current root window and opens the signup window.
@@ -180,7 +171,6 @@ def login():
     """
     root.destroy()
     import signup
-
 
     ###########login page UI ##############
 
@@ -212,3 +202,5 @@ image_label.place(x=665,y=113)
 
 
 root.mainloop()
+
+##########END##########

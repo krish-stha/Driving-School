@@ -3,13 +3,10 @@ from PIL import Image, ImageTk
 from tkinter import messagebox
 import sqlite3
 
-###created window
+###created window######
 root=Tk()
 root.title("Sign up")
 root.geometry("1920x1080")
-
-
-
 
 def log_in():
     """
@@ -25,9 +22,7 @@ def log_in():
     root.destroy()
     import login
     
-    
 def connect_database():
-
     """
     Connects to the SQLite database and creates a table if it doesn't exist.
     
@@ -46,7 +41,6 @@ def connect_database():
         None
     """
     
-
     conn = sqlite3.connect("dri.db")
     db = conn.cursor()
     db.execute("""CREATE TABLE IF NOT EXISTS information
@@ -123,7 +117,6 @@ def clear():
     
 title = Label(root,text="Already have an account?",font=("Honk",11)).place(x=1280, y=25)
 Login = Button(root,text="Login",border=0,cursor='hand2',font=("Honk",11,"underline"),fg="sky blue",command=log_in).place(x=1450, y=24)
-
 
 sign_up_title = Label(root,text="Sign up",font=("Cabiler",23)).place(x=1115 , y=114)
 account_title = Label(root,text="Create your account",font=("cabiler",13)).place(x=1095 , y=165)
