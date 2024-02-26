@@ -140,14 +140,30 @@ def payment():
     root.destroy()
     import invo
 
-home1=Button(big_label,text="Home",cursor='hand2',font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=home)
-home1.place(x=40,y=500)
+home_image = Image.open("home_icon.png")  
+home_photo = ImageTk.PhotoImage(home_image)
+home_image_label=Label(big_label,image=home_photo,bg="#152844")
+home_image_label.place(x=17,y=495)
 
-student=Button(big_label,text="Student",cursor='hand2',font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
-student.place(x=40,y=560)
+home=Button(big_label,cursor='hand2',text="Home",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=home)
+home.place(x=60,y=500)
 
-invoice=Button(big_label,text="Setting",cursor='hand2',font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=payment)
-invoice.place(x=40,y=620)
+student_image = Image.open("student_icon.png")  
+student_photo = ImageTk.PhotoImage(student_image)
+student_image_label=Label(big_label,image=student_photo,bg="#152844")
+student_image_label.place(x=17,y=555)
+
+student=Button(big_label,cursor='hand2',text="Student",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
+student.place(x=60,y=560)
+
+setting_image = Image.open("setting_icon.png")  
+setting_photo = ImageTk.PhotoImage(setting_image)
+image_label=Label(big_label,image=setting_photo,bg="#152844")
+image_label.place(x=17,y=615)
+
+setting1=Button(big_label,cursor='hand2',text="Setting",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=payment)
+setting1.place(x=60,y=620)
+
 
 image = Image.open("drivelogo.png")  
 photo = ImageTk.PhotoImage(image)
@@ -404,7 +420,7 @@ def edit_record(event):
         elif category_value.capitalize() == "Car":
                 price_per_day = 700
     
-        total_payment = days_rented * price_per_day
+        total_payment = f" RS {days_rented * price_per_day}"
         bill_window = Toplevel(root)
         bill_window.title("Bill")
         bill_window.geometry("300x400+1240+195")

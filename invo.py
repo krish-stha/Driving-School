@@ -83,14 +83,29 @@ big_label.place(x=0)
 right_label=Label(root,height=50,width=170,bg="white")
 right_label.place(x=356,y=70)
 
-home=Button(big_label,cursor='hand2',text="Home",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=home)
-home.place(x=40,y=500)
+home_image = Image.open("home_icon.png")  
+home_photo = ImageTk.PhotoImage(home_image)
+home_image_label=Label(big_label,image=home_photo,bg="#152844")
+home_image_label.place(x=17,y=495)
+
+home1=Button(big_label,cursor='hand2',text="Home",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=home)
+home1.place(x=60,y=500)
+
+student_image = Image.open("student_icon.png")  
+student_photo = ImageTk.PhotoImage(student_image)
+student_image_label=Label(big_label,image=student_photo,bg="#152844")
+student_image_label.place(x=17,y=555)
 
 student=Button(big_label,cursor='hand2',text="Student",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844",command=std)
-student.place(x=40,y=560)
+student.place(x=60,y=560)
 
-invoice=Button(big_label,cursor='hand2',text="Setting",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
-invoice.place(x=40,y=620)
+setting_image = Image.open("setting_icon.png")  
+setting_photo = ImageTk.PhotoImage(setting_image)
+image_label=Label(big_label,image=setting_photo,bg="#152844")
+image_label.place(x=17,y=615)
+
+setting1=Button(big_label,cursor='hand2',text="Setting",font=("arial rounded MT Bold",15),bg="#152844",fg="white",bd=0,activebackground="#152844")
+setting1.place(x=60,y=620)
 
 # stering image
 image = Image.open("drivelogo.png")  
