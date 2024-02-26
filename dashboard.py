@@ -392,6 +392,11 @@ setting.place(x=40,y=620)
 inquiry=Label(right_label, height=20, width=45, relief="sunken",bg="white",bd=3)
 inquiry.place(x=50, y=220)
 
+inq_image = Image.open("people icon.png")  
+inq_photo = ImageTk.PhotoImage(inq_image)
+image_label=Label(right_label,image=inq_photo,bg="white")
+image_label.place(x=100,y=360)
+
 inquriy_number=Label(right_label,text=f'00{totalRecords}',font=("Arial", 40),bd=0,bg="white")
 inquriy_number.place(x=180,y=350)
 
@@ -402,6 +407,10 @@ inquiry_text.place(x=50, y=520)
 ongoing=Label(right_label, height=20, width=45, bg="white",relief="sunken", bd=3)
 ongoing.place(x=430, y=220)
 
+
+image_label=Label(right_label,image=inq_photo,bg="white")
+image_label.place(x=480,y=360)
+
 ongoing_number=Label(right_label,text=f'00{no_of_ongoing_students}',font=("Arial", 40),bd=0,bg="white")
 ongoing_number.place(x=560,y=350)
 
@@ -410,6 +419,9 @@ ongoing_text.place(x=430, y=520)
 
 closed=Label(right_label, height=20, width=45,bg="white",relief="sunken", bd=3)
 closed.place(x=800, y=220)
+
+image_label=Label(right_label,image=inq_photo,bg="white")
+image_label.place(x=850,y=360)
 
 closed_number=Label(right_label,text=f'00{no_of_closed_students}',font=("Arial", 40),bd=0,bg="white")
 closed_number.place(x=930,y=350)
