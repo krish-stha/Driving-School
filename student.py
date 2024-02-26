@@ -9,7 +9,7 @@ root=Tk()
 root.geometry("1920x1080")
 root.title('Dashboard')
 root.config(bg="white")
-
+category_value=""
 def home():
     """
     Function to return to the home/dashboard screen.
@@ -46,7 +46,7 @@ def search_students():
     """
     Perform a search operation on student records based on the provided search query.
 
-    Retrieves the search query from the entry widget and searches for matching records in the 'usersData' table
+    Retrieves the search query from the entry widget and searches for matching records in the 'usersTable' table
     of the 'dri.db' SQLite database. Clears the existing data in the Treeview widget and displays the search
     results if any, otherwise displays an error message in case of database errors.
     """
@@ -63,7 +63,7 @@ def search_students():
         db = conn.cursor()
 
         # Perform the search query in the database
-        db.execute("SELECT * FROM usersData WHERE firstName LIKE ? OR lastName LIKE ?", ('%' + search_query + '%', '%' + search_query + '%'))
+        db.execute("SELECT * FROM usersTable WHERE firstName LIKE ? OR lastName LIKE ?", ('%' + search_query + '%', '%' + search_query + '%'))
         searched_records = db.fetchall()
 
         # Insert the search results into the Treeview
@@ -176,6 +176,8 @@ def edit_record(event):
     global country_editor
     global category_editor
     global zipCode_editor
+    global category_value
+
     
     conn = sqlite3.connect("dri.db")
 
@@ -243,6 +245,9 @@ def edit_record(event):
     category_editor.insert(0, values[11])
     zip_editor.insert(0, values[12])
     
+    
+    category_value=values[11]
+   
     #update function
     def update_data():
         """
@@ -291,7 +296,7 @@ def edit_record(event):
             db = conn.cursor()
             db.execute(
                 """
-            UPDATE usersData
+            UPDATE usersTable
             SET firstName = ?, lastName = ?, dob = ?, clientId=?, email=?, number=?, street=?, city=?, state=?, country=?, category=?, zipCode=?
             WHERE usersId = ?
             """,
@@ -326,7 +331,7 @@ def edit_record(event):
 
     This function first checks if a record is selected in the Treeview widget 'tree'. If no record is selected, it displays a warning.
     If a record is selected, it asks for confirmation before proceeding with the deletion. If confirmed, it deletes the selected record
-    from the 'usersData' table in the 'dri.db' SQLite database and removes it from the Treeview widget.
+    from the 'usersTable' table in the 'dri.db' SQLite database and removes it from the Treeview widget.
     """
         selected_item = tree.selection()
         if not selected_item:
@@ -341,20 +346,26 @@ def edit_record(event):
             item_id = tree.item(item, "values")[0]
             conn = sqlite3.connect("dri.db")
             cursor = conn.cursor()
-            cursor.execute("DELETE FROM usersData WHERE usersId=?", (item_id,))
+            cursor.execute("DELETE FROM usersTable WHERE usersId=?", (item_id,))
             conn.commit()
             conn.close()
             tree.delete(item)
     
-   
-        
     def generate_bill():
         def closed_record():
           """
     Function to close the editor window.
-
     This function destroys the Tkinter window named 'editor'.
           """
+          conn = sqlite3.connect("dri.db")
+          cursor = conn.cursor()
+          cursor.execute("UPDATE usersTable SET status = 'closed' WHERE usersId = ?", (userId,))
+          conn.commit()
+          conn.close()  
+          for record in tree.get_children():
+            tree.delete(record)
+          show_data()
+          
           bill_window.destroy()
           editor.destroy()
 
@@ -364,10 +375,17 @@ def edit_record(event):
             return
 
         item_values = tree.item(selected_item[0], "values")
-        start_date = datetime.strptime(item_values[3], "%Y-%m-%d")
+        start_date_str = start_date_entry.get()
+        start_date = datetime.strptime(start_date_str, "%Y-%m-%d")
         end_date = datetime.now()
         days_rented = (end_date - start_date).days
-        price_per_day = 500
+        if category_value.capitalize() == "Bike":
+                price_per_day = 1000
+        elif category_value.capitalize() == "Scooter":
+                price_per_day = 800
+        elif category_value.capitalize() == "Car":
+                price_per_day = 2000
+    
         total_payment = days_rented * price_per_day
        
 
@@ -405,7 +423,7 @@ def edit_record(event):
         Label(bill_window, text="Total Payment:",font=("arial rounded MT Bold",10)).place(x=25, y=245)
         Label(bill_window, text=total_payment,font=("arial rounded MT Bold",10)).place(x=140, y=245)
 
-        closed_button=Button(bill_window,text="Paid",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white",command=closed_record)
+        closed_button=Button(bill_window,text="Pay",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white",command=closed_record)
         closed_button.place(x=65,y=320)
 
 
@@ -415,25 +433,25 @@ def edit_record(event):
 
     delete_button=Button(editor,text="Delete",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white",command=delete_record)
     delete_button.place(x=60,y=320)
-
-    bill_button = Button(editor, text="Generate Bill",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white" ,command=generate_bill)
-    bill_button.place(x=660, y=320)
-
     
- 
- 
+    Label(editor, text="Start Date:").place(x=600,y=310)
+    start_date_entry = Entry(editor)
+    start_date_entry.place(x=660,y=310)
+    bill_button = Button(editor, text="Generate Bill",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white" ,command=generate_bill)
+    bill_button.place(x=660, y=340)
+
 
 def show_data():
     """
-    Function to display data from the 'usersData' table in the Treeview widget.
+    Function to display data from the 'usersTable' table in the Treeview widget.
 
-    This function retrieves all records from the 'usersData' table in the 'dri.db' SQLite database,
+    This function retrieves all records from the 'usersTable' table in the 'dri.db' SQLite database,
     inserts each record into the Treeview widget 'tree', and then closes the database connection.
     """
     conn = sqlite3.connect("dri.db")
     cursor = conn.cursor()
 
-    cursor.execute("SELECT * FROM usersData")
+    cursor.execute("SELECT * FROM usersTable")
     rows = cursor.fetchall()
 
     for row in rows:
@@ -441,7 +459,7 @@ def show_data():
 
     conn.close()
 
-tree = ttk.Treeview(root, columns=("ID", "First Name", "Last Name", "DOB", "Client ID", "Email", "Number", "Street", "City", "State", "Country", "Category", "Zip Code"), show="headings",height=25)
+tree = ttk.Treeview(root, columns=("ID", "First Name", "Last Name", "DOB", "Client ID", "Email", "Number", "Street", "City", "State", "Country", "Category", "Zip Code","Status"), show="headings",height=25)
 tree.place(x=370,y=120)
 
 tree.heading("ID", text="ID")
@@ -457,30 +475,25 @@ tree.heading("State", text="State")
 tree.heading("Country", text="Country")
 tree.heading("Category", text="Category")
 tree.heading("Zip Code", text="Zip Code")
+tree.heading("Status",text="Status")
 
-tree.column("ID",width=40)
-tree.column("First Name", width=100)
-tree.column("Last Name", width=100)
-tree.column("DOB",width=90 )
+tree.column("ID",width=30)
+tree.column("First Name", width=80)
+tree.column("Last Name", width=80)
+tree.column("DOB",width=80 )
 tree.column("Client ID",width=70 )
-tree.column("Email", width=200)
+tree.column("Email", width=180)
 tree.column("Number", width=90)
 tree.column("Street", width=80)
 tree.column("City", width=80)
 tree.column("State",width=70)
-tree.column("Country", width=90)
+tree.column("Country", width=80)
 tree.column("Category", width=70)
 tree.column("Zip Code", width=70)
+tree.column("Status",width=70)
 
 show_data()
 
 tree.bind("<Double-1>", edit_record)
 root.mainloop()
-
-
-
-
-
-
-
 # ###################above orginal

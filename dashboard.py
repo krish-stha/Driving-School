@@ -1,4 +1,3 @@
-
 from tkinter import *
 from PIL import Image, ImageTk
 from tkinter import messagebox
@@ -10,6 +9,28 @@ root=Tk()
 root.geometry("1920x1080")
 root.title('Dashboard')
 root.config(bg="white")
+
+conn = sqlite3.connect("dri.db")
+db = conn.cursor()
+db.execute("""CREATE TABLE IF NOT EXISTS usersTable(
+                usersId INTEGER PRIMARY KEY AUTOINCREMENT,
+                firstName varchar(255),
+                lastName varchar(255),
+                dob varchar(255),
+                clientId integer,
+                email varchar(255),
+                number integer,
+                street varchar(255),
+                city varchar(255),
+                state varchar(255),
+                country varchar(255),
+                category varchar(255),
+                zipCode integer,
+                status varchar(255)
+                )""")
+conn.commit()
+conn.close()
+  
 
 def std():
     """
@@ -70,6 +91,7 @@ def form():
         city_value=city_box.get()
         zip_value=zip_box.get()  
         category_value=category_box.get()
+        user_status="active"
 
 
         
@@ -123,9 +145,9 @@ def form():
                 conn = sqlite3.connect("dri.db")
                 db = conn.cursor()
                 db.execute(
-                """INSERT INTO usersData(firstName,lastName,dob,clientId,email,number,street,city,state,country,category,zipCode) 
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-                (first_name_value, last_name_value, date_value, client_id_value,email_value,phone_value,street_value,city_value,state_value,country_value,category_value,zip_value),
+                """INSERT INTO usersTable(firstName,lastName,dob,clientId,email,number,street,city,state,country,category,zipCode,status) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+                (first_name_value, last_name_value, date_value, client_id_value,email_value,phone_value,street_value,city_value,state_value,country_value,category_value,zip_value,user_status),
                 )
                 conn.commit()
                 messagebox.showinfo("Success","Added  Successfully")
@@ -137,7 +159,7 @@ def form():
                 db.close()
                 conn.close()
                 retrieve()
-                get_record_count()
+                # get_record_count()
 
     def retrieve():
         """
@@ -153,7 +175,7 @@ def form():
             conn = sqlite3.connect("dri.db")
             db = conn.cursor()
 
-            db.execute("SELECT * FROM usersData")
+            db.execute("SELECT * FROM usersTable")
 
             records = db.fetchall()
             
@@ -164,26 +186,7 @@ def form():
         finally:
             db.close()
             conn.close()
-    conn = sqlite3.connect("dri.db")
-    db = conn.cursor()
-    db.execute("""CREATE TABLE IF NOT EXISTS usersData(
-                usersId INTEGER PRIMARY KEY AUTOINCREMENT,
-                firstName varchar(255),
-                lastName varchar(255),
-                dob varchar(255),
-                clientId integer,
-                email varchar(255),
-                number integer,
-                street varchar(255),
-                city varchar(255),
-                state varchar(255),
-                country varchar(255),
-                category varchar(255),
-                zipCode integer
-                )""")
-    conn.commit()
-    conn.close()
-    retrieve()
+  
 
     ##########Personal details UI ######
 
@@ -244,33 +247,57 @@ def form():
     root.mainloop()
 
 def get_record_count():
-        """
-    Function to retrieve the total number of records in the 'usersData' table.
-
-    This function connects to the 'dri.db' SQLite database, queries the 'usersData' table 
-    to count the total number of records, closes the database connection, and returns the count.
-
-    Returns:
-    - count (int): The total number of records in the 'usersData' table.
-    """
         global no_of_inquiry
         global no_of_ongoing_students
         no_of_inquiry=""
         conn = sqlite3.connect("dri.db")
         cursor = conn.cursor()
 
-        cursor.execute("SELECT COUNT(*) FROM usersData")
+        cursor.execute("SELECT COUNT(*) FROM usersTable")
         count = cursor.fetchone()[0]
 
         conn.close()
-        print(count)
+        
+        return count
+    
+def get_active_record_count():
+        global no_of_inquiry
+        global no_of_ongoing_students
+        no_of_inquiry=""
+        conn = sqlite3.connect("dri.db")
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT COUNT(*) FROM usersTable WHERE status = 'active'")
+        count = cursor.fetchone()[0]
+
+        conn.close()
+        
+        
+
+        return count
+    
+def get_closed_record_count():
+        global no_of_inquiry
+        global no_of_ongoing_students
+        no_of_inquiry=""
+        conn = sqlite3.connect("dri.db")
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT COUNT(*) FROM usersTable WHERE status != 'active'")
+        count = cursor.fetchone()[0]
+
+        conn.close()
+       
         
 
         return count
 
-no_of_inquiry=get_record_count()
-no_of_ongoing_students=no_of_inquiry
-no_of_closed_students=0
+    
+
+totalRecords=get_record_count()
+no_of_ongoing_students=get_active_record_count()
+no_of_closed_students=get_closed_record_count()
+
 
 # # dashboard UI##
 
@@ -333,7 +360,7 @@ setting.place(x=40,y=620)
 inquiry=Label(right_label, height=20, width=45, relief="sunken",bg="white",bd=3)
 inquiry.place(x=50, y=220)
 
-inquriy_number=Label(right_label,text=no_of_inquiry,font=("Arial", 40),bd=0,bg="white")
+inquriy_number=Label(right_label,text=f'00{totalRecords}',font=("Arial", 40),bd=0,bg="white")
 inquriy_number.place(x=180,y=350)
 
 inquiry_text=Label(right_label, height=5, width=46,text="Number Of Inquiry",fg="white",font=("arial rounded MT Bold",8), relief="ridge",bg="#3985FF")
@@ -343,7 +370,7 @@ inquiry_text.place(x=50, y=520)
 ongoing=Label(right_label, height=20, width=45, bg="white",relief="sunken", bd=3)
 ongoing.place(x=430, y=220)
 
-ongoing_number=Label(right_label,text=no_of_ongoing_students,font=("Arial", 40),bd=0,bg="white")
+ongoing_number=Label(right_label,text=f'00{no_of_ongoing_students}',font=("Arial", 40),bd=0,bg="white")
 ongoing_number.place(x=560,y=350)
 
 ongoing_text=Label(right_label, height=5, text="Number Of Ongoing Student",fg="white",font=("arial rounded MT Bold",8),width=46, bg="#3985FF", bd=1, relief="ridge")
@@ -354,7 +381,7 @@ ongoing_text.place(x=430, y=520)
 closed=Label(right_label, height=20, width=45,bg="white",relief="sunken", bd=3)
 closed.place(x=800, y=220)
 
-closed_number=Label(right_label,text=no_of_closed_students,font=("Arial", 40),bd=0,bg="white")
+closed_number=Label(right_label,text=f'00{no_of_closed_students}',font=("Arial", 40),bd=0,bg="white")
 closed_number.place(x=930,y=350)
 
 closed_text=Label(right_label, height=5,text="Number Of Closed Student",fg="white",font=("arial rounded MT Bold",8), width=46, bg="#3985FF", bd=1, relief="ridge")
