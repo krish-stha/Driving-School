@@ -161,7 +161,7 @@ def edit_record(event):
     global editor
     editor = Tk()
     editor.title("Update Data")
-    editor.geometry(f'860x400+450+195')
+    editor.geometry(f'860x400+370+195')
     editor.resizable(False, False)
 
     global firstName_editor
@@ -346,15 +346,18 @@ def edit_record(event):
             conn.close()
             tree.delete(item)
     
-    def closed_record():
-        """
+   
+        
+    def generate_bill():
+        def closed_record():
+          """
     Function to close the editor window.
 
     This function destroys the Tkinter window named 'editor'.
-    """
-        editor.destroy()
-        
-    def generate_bill():
+          """
+          bill_window.destroy()
+          editor.destroy()
+
         selected_item = tree.selection()
         if not selected_item:
             messagebox.showwarning("Warning", "Please select a record to generate bill.")
@@ -366,58 +369,57 @@ def edit_record(event):
         days_rented = (end_date - start_date).days
         price_per_day = 500
         total_payment = days_rented * price_per_day
+       
 
         bill_window = Toplevel(root)
         bill_window.title("Bill")
-        bill_window.geometry("400x400")
+        bill_window.geometry("300x400+1240+195")
+     
 
-        bill_label = Label(bill_window, text="Vehicle Rental Bill", font=("Arial", 16, "bold"))
-        bill_label.place(x=10, y=10)
+        big_label = Label(bill_window, text="Payment Receipt", font=("cabiler", 19, "bold"),fg='sky blue')
+        big_label.place(x=45, y=10)
 
-        # Customer information
-        customer_frame = Frame(bill_window)
-        customer_frame.place(x=10, y=50)
 
-        Label(customer_frame, text="Customer Name:").grid(row=0, column=0, sticky="w")
-        Label(customer_frame, text=f"{item_values[1]} {item_values[2]}").grid(row=0, column=1, sticky="w")
+        # Customer details
+        Label(bill_window, text="Name:",font=("arial rounded MT Bold",10)).place(x=25, y=70)
+        Label(bill_window, text=f"{item_values[1]} {item_values[2]}",font=("arial rounded MT Bold",10)).place(x=120, y=70)  # Adjust x-coordinate
 
-        Label(customer_frame, text="Email:").grid(row=1, column=0, sticky="w")
-        Label(customer_frame, text=item_values[5]).grid(row=1, column=1, sticky="w")
+        Label(bill_window, text="Email:",font=("arial rounded MT Bold",10)).place(x=25, y=95)
+        Label(bill_window, text=item_values[5],font=("arial rounded MT Bold",10)).place(x=70, y=95)
 
-        Label(customer_frame, text="Phone Number:").grid(row=2, column=0, sticky="w")
-        Label(customer_frame, text=item_values[6]).grid(row=2, column=1, sticky="w")
+        Label(bill_window, text="Contact No:",font=("arial rounded MT Bold",10)).place(x=25, y=120)
+        Label(bill_window, text=item_values[6],font=("arial rounded MT Bold",10)).place(x=120, y=120)
 
-        # Bill details
-        details_frame = Frame(bill_window)
-        details_frame.place(x=10, y=120)
+        Label(bill_window, text="Start Date:",font=("arial rounded MT Bold",10)).place(x=25, y=145)
+        Label(bill_window, text=start_date.strftime("%Y-%m-%d"),font=("arial rounded MT Bold",10)).place(x=120, y=145)
 
-        Label(details_frame, text="Start Date:").grid(row=0, column=0, sticky="w")
-        Label(details_frame, text=start_date.strftime("%Y-%m-%d")).grid(row=0, column=1, sticky="w")
+        Label(bill_window, text="End Date:",font=("arial rounded MT Bold",10)).place(x=25, y=170)
+        Label(bill_window, text=end_date.strftime("%Y-%m-%d"),font=("arial rounded MT Bold",10)).place(x=120, y=170)
 
-        Label(details_frame, text="End Date:").grid(row=1, column=0, sticky="w")
-        Label(details_frame, text=end_date.strftime("%Y-%m-%d")).grid(row=1, column=1, sticky="w")
+        Label(bill_window, text="Days Rented:",font=("arial rounded MT Bold",10)).place(x=25, y=195)
+        Label(bill_window, text=days_rented,font=("arial rounded MT Bold",10)).place(x=120, y=195)
 
-        Label(details_frame, text="Days Rented:").grid(row=2, column=0, sticky="w")
-        Label(details_frame, text=days_rented).grid(row=2, column=1, sticky="w")
+        Label(bill_window, text="Price per Day:",font=("arial rounded MT Bold",10)).place(x=25, y=220)
+        Label(bill_window, text=price_per_day,font=("arial rounded MT Bold",10)).place(x=140, y=220)
 
-        Label(details_frame, text="Price per Day:").grid(row=3, column=0, sticky="w")
-        Label(details_frame, text=price_per_day).grid(row=3, column=1, sticky="w")
+        Label(bill_window, text="Total Payment:",font=("arial rounded MT Bold",10)).place(x=25, y=245)
+        Label(bill_window, text=total_payment,font=("arial rounded MT Bold",10)).place(x=140, y=245)
 
-        Label(details_frame, text="Total Payment:").grid(row=4, column=0, sticky="w")
-        Label(details_frame, text=total_payment).grid(row=4, column=1, sticky="w")
+        closed_button=Button(bill_window,text="Paid",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white",command=closed_record)
+        closed_button.place(x=65,y=320)
+
 
             
-    edit_button=Button(editor,text="Save",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=update_data)
-    edit_button.place(x=240,y=320)
+    edit_button=Button(editor,text="Save",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white",command=update_data)
+    edit_button.place(x=360,y=320)
 
-    delete_button=Button(editor,text="Delete",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=delete_record)
-    delete_button.place(x=30,y=320)
+    delete_button=Button(editor,text="Delete",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white",command=delete_record)
+    delete_button.place(x=60,y=320)
 
-    bill_button = Button(editor, text="Generate Bill",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white" ,command=generate_bill)
-    bill_button.place(x=450, y=320)
+    bill_button = Button(editor, text="Generate Bill",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white" ,command=generate_bill)
+    bill_button.place(x=660, y=320)
 
-    closed_button=Button(editor,text="Close",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=closed_record)
-    closed_button.place(x=660,y=320)
+    
  
  
 
