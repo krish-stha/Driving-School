@@ -353,17 +353,72 @@ def edit_record(event):
     This function destroys the Tkinter window named 'editor'.
     """
         editor.destroy()
+        
+    def generate_bill():
+        selected_item = tree.selection()
+        if not selected_item:
+            messagebox.showwarning("Warning", "Please select a record to generate bill.")
+            return
+
+        item_values = tree.item(selected_item[0], "values")
+        start_date = datetime.strptime(item_values[3], "%Y-%m-%d")
+        end_date = datetime.now()
+        days_rented = (end_date - start_date).days
+        price_per_day = 500
+        total_payment = days_rented * price_per_day
+
+        bill_window = Toplevel(root)
+        bill_window.title("Bill")
+        bill_window.geometry("400x400")
+
+        bill_label = Label(bill_window, text="Vehicle Rental Bill", font=("Arial", 16, "bold"))
+        bill_label.place(x=10, y=10)
+
+        # Customer information
+        customer_frame = Frame(bill_window)
+        customer_frame.place(x=10, y=50)
+
+        Label(customer_frame, text="Customer Name:").grid(row=0, column=0, sticky="w")
+        Label(customer_frame, text=f"{item_values[1]} {item_values[2]}").grid(row=0, column=1, sticky="w")
+
+        Label(customer_frame, text="Email:").grid(row=1, column=0, sticky="w")
+        Label(customer_frame, text=item_values[5]).grid(row=1, column=1, sticky="w")
+
+        Label(customer_frame, text="Phone Number:").grid(row=2, column=0, sticky="w")
+        Label(customer_frame, text=item_values[6]).grid(row=2, column=1, sticky="w")
+
+        # Bill details
+        details_frame = Frame(bill_window)
+        details_frame.place(x=10, y=120)
+
+        Label(details_frame, text="Start Date:").grid(row=0, column=0, sticky="w")
+        Label(details_frame, text=start_date.strftime("%Y-%m-%d")).grid(row=0, column=1, sticky="w")
+
+        Label(details_frame, text="End Date:").grid(row=1, column=0, sticky="w")
+        Label(details_frame, text=end_date.strftime("%Y-%m-%d")).grid(row=1, column=1, sticky="w")
+
+        Label(details_frame, text="Days Rented:").grid(row=2, column=0, sticky="w")
+        Label(details_frame, text=days_rented).grid(row=2, column=1, sticky="w")
+
+        Label(details_frame, text="Price per Day:").grid(row=3, column=0, sticky="w")
+        Label(details_frame, text=price_per_day).grid(row=3, column=1, sticky="w")
+
+        Label(details_frame, text="Total Payment:").grid(row=4, column=0, sticky="w")
+        Label(details_frame, text=total_payment).grid(row=4, column=1, sticky="w")
+
             
     edit_button=Button(editor,text="Save",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=update_data)
-    edit_button.place(x=340,y=310)
+    edit_button.place(x=200,y=320)
 
     delete_button=Button(editor,text="Delete",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=delete_record)
-    delete_button.place(x=50,y=320)
+    delete_button.place(x=20,y=320)
 
     closed_button=Button(editor,text="Close",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=closed_record)
-    closed_button.place(x=660,y=320)
-
-
+    closed_button.place(x=600,y=320)
+ 
+    bill_button = Button(editor, text="Generate Bill",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white" ,command=generate_bill)
+    bill_button.place(x=400, y=320)
+ 
 
 def show_data():
     """
