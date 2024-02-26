@@ -408,16 +408,16 @@ def edit_record(event):
 
             
     edit_button=Button(editor,text="Save",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=update_data)
-    edit_button.place(x=200,y=320)
+    edit_button.place(x=240,y=320)
 
     delete_button=Button(editor,text="Delete",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=delete_record)
-    delete_button.place(x=20,y=320)
+    delete_button.place(x=30,y=320)
 
     bill_button = Button(editor, text="Generate Bill",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white" ,command=generate_bill)
-    bill_button.place(x=400, y=320)
+    bill_button.place(x=450, y=320)
 
     closed_button=Button(editor,text="Close",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground="#3985FF",bg="#3985FF",fg="white",command=closed_record)
-    closed_button.place(x=650,y=320)
+    closed_button.place(x=660,y=320)
  
  
 
