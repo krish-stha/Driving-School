@@ -380,11 +380,11 @@ def edit_record(event):
         end_date = datetime.now()
         days_rented = (end_date - start_date).days
         if category_value.capitalize() == "Bike":
-                price_per_day = 1000
+                price_per_day = 450
         elif category_value.capitalize() == "Scooter":
-                price_per_day = 800
+                price_per_day = 350
         elif category_value.capitalize() == "Car":
-                price_per_day = 2000
+                price_per_day = 700
     
         total_payment = days_rented * price_per_day
        
@@ -434,8 +434,8 @@ def edit_record(event):
     delete_button=Button(editor,text="Delete",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white",command=delete_record)
     delete_button.place(x=60,y=320)
     
-    Label(editor, text="Start Date:").place(x=600,y=310)
-    start_date_entry = Entry(editor)
+    Label(editor, text="Start Date",font=("arial rounded MT Bold",8)).place(x=600,y=310)
+    start_date_entry = Entry(editor,width=23)
     start_date_entry.place(x=660,y=310)
     bill_button = Button(editor, text="Generate Bill",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white" ,command=generate_bill)
     bill_button.place(x=660, y=340)
@@ -481,7 +481,7 @@ tree.column("ID",width=30)
 tree.column("First Name", width=80)
 tree.column("Last Name", width=80)
 tree.column("DOB",width=80 )
-tree.column("Client ID",width=70 )
+tree.column("Client ID",width=80 )
 tree.column("Email", width=180)
 tree.column("Number", width=90)
 tree.column("Street", width=80)
