@@ -74,7 +74,6 @@ def form():
 
     Returns:
         None
-        
     """
         first_name_value=first_name_box.get()
         last_name_value=last_name_box.get()
