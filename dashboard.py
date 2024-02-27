@@ -77,6 +77,7 @@ def form():
         first_name_value=first_name_box.get()
         last_name_value=last_name_box.get()
         date_value=date_box.get()
+        
         client_id_value=client_id_box.get()
         email_value=email_box.get()
         phone_value=phone_box.get()
