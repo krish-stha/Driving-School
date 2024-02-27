@@ -38,7 +38,6 @@ def connect_database():
     to open the login window.
 
     Returns:
-    
         None
     """
     
