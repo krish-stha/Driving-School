@@ -43,6 +43,7 @@ def login_user():
             conn.close()
             root.destroy()
             import dashboard
+            
 def clear():
     """
     Clears the content of the username and password entry fields.

@@ -421,7 +421,6 @@ inquiry_text.place(x=50, y=520)
 ongoing=Label(right_label, height=20, width=45, bg="white",relief="sunken", bd=3)
 ongoing.place(x=430, y=220)
 
-
 image_label=Label(right_label,image=inq_photo,bg="white")
 image_label.place(x=480,y=360)
 
@@ -430,6 +429,7 @@ ongoing_number.place(x=560,y=350)
 
 ongoing_text=Label(right_label, height=5, text="Number Of Ongoing Student",fg="white",font=("arial rounded MT Bold",8),width=46, bg="#3985FF", bd=1, relief="ridge")
 ongoing_text.place(x=430, y=520)
+
 
 closed=Label(right_label, height=20, width=45,bg="white",relief="sunken", bd=3)
 closed.place(x=800, y=220)
@@ -442,6 +442,7 @@ closed_number.place(x=930,y=350)
 
 closed_text=Label(right_label, height=5,text="Number Of Closed Student",fg="white",font=("arial rounded MT Bold",8), width=46, bg="#3985FF", bd=1, relief="ridge")
 closed_text.place(x=800, y=520)
+
 
 image = Image.open("drivelogo.png")  
 photo = ImageTk.PhotoImage(image)

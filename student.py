@@ -381,6 +381,7 @@ def edit_record(event):
             tree.delete(item)
     
     def generate_bill():
+        
         def closed_record():
           """
             Function to close the editor window.
