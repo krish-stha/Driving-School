@@ -72,6 +72,7 @@ def form():
     email ends with '@gmail.com', valid phone number, and then inserts the data
     into the SQLite database and updated the numbers of inquiries,ongoing Students.
     Returns:
+    
         None
     """
         first_name_value=first_name_box.get()
