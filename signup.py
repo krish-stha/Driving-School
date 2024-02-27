@@ -58,8 +58,7 @@ def connect_database():
     existing_user = db.fetchone()
     
     if existing_user:
-        messagebox.showerror('Error', 'Email already exists. Please use a different email.')
-   
+        messagebox.showerror('Error', 'Email already exists. Please use a different email.') 
     else:
         if (email_entry.get() == '' or Firstname_entry.get() == '' or Lastname_entry.get() == '' or contact_entry.get() == '' or password_entry.get() == '' or conf_password_entry.get() == ''):
             messagebox.showerror('Error', 'All Fields Are Required.')
