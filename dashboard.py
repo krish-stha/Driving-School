@@ -95,8 +95,8 @@ def form():
             return
 
         # Check if first name and last name contain only alphabets
-        if not first_name_value.isalpha() or not last_name_value.isalpha():
-            messagebox.showerror('Error', 'First name and last name should contain only alphabets.', parent=window)
+        if not first_name_value.isalpha() or not last_name_value.isalpha() or not state_value.isalpha() or not country_value.isalpha() or not city_value.isalpha() or not category_value.isalpha():
+            messagebox.showerror('Error', 'Recheck the given information.', parent=window)
             return
 
          # Check if date is in the correct format and the person is above 16 years old
@@ -205,7 +205,7 @@ def form():
     date_box.place(x=10, y=120)
     instruction = Label(window,text="Date must be in YYYY-MM-DD[2012-12-22]format",font=("arial rounded MT Bold",7)).place(x=10, y=140)
 
-    Client_id = Label(window,text="Client id",font=("arial rounded MT Bold",8)).place(x=300, y=100)
+    Client_id = Label(window,text="Citizenship ID",font=("arial rounded MT Bold",8)).place(x=300, y=100)
     client_id_box = Entry(window,width=40)
     client_id_box.place(x=300, y=120)
 
@@ -348,8 +348,7 @@ profile_icon_button.place(x=1420, y=10)
 
 # Create a menu for the user
 user_menu = Menu(root, tearoff=0, bg="lightgray", fg="black", font=("Helvetica", 10, "bold"))
-user_menu.add_command(label="Sanjeev Manandhar", font=("Helvetica", 10))
-user_menu.add_separator()
+
 user_menu.add_command(label="Sign out", font=("Helvetica", 10, "bold"), command=signOut)
 
 # Bind the menu to the profile icon button
@@ -414,7 +413,7 @@ image_label.place(x=100,y=360)
 inquriy_number=Label(right_label,text=f'00{totalRecords}',font=("Arial", 40),bd=0,bg="white")
 inquriy_number.place(x=180,y=350)
 
-inquiry_text=Label(right_label, height=5, width=46,text="Number Of Inquiry",fg="white",font=("arial rounded MT Bold",8), relief="ridge",bg="#3985FF")
+inquiry_text=Label(right_label, height=5, width=46,text="Number Of Inquiries",fg="white",font=("arial rounded MT Bold",8), relief="ridge",bg="#3985FF")
 inquiry_text.place(x=50, y=520)
 
 
@@ -427,7 +426,7 @@ image_label.place(x=480,y=360)
 ongoing_number=Label(right_label,text=f'00{no_of_ongoing_students}',font=("Arial", 40),bd=0,bg="white")
 ongoing_number.place(x=560,y=350)
 
-ongoing_text=Label(right_label, height=5, text="Number Of Ongoing Student",fg="white",font=("arial rounded MT Bold",8),width=46, bg="#3985FF", bd=1, relief="ridge")
+ongoing_text=Label(right_label, height=5, text="Number Of Ongoing Students",fg="white",font=("arial rounded MT Bold",8),width=46, bg="#3985FF", bd=1, relief="ridge")
 ongoing_text.place(x=430, y=520)
 
 
@@ -440,7 +439,7 @@ image_label.place(x=850,y=360)
 closed_number=Label(right_label,text=f'00{no_of_closed_students}',font=("Arial", 40),bd=0,bg="white")
 closed_number.place(x=930,y=350)
 
-closed_text=Label(right_label, height=5,text="Number Of Closed Student",fg="white",font=("arial rounded MT Bold",8), width=46, bg="#3985FF", bd=1, relief="ridge")
+closed_text=Label(right_label, height=5,text="Number Of Closed Students",fg="white",font=("arial rounded MT Bold",8), width=46, bg="#3985FF", bd=1, relief="ridge")
 closed_text.place(x=800, y=520)
 
 

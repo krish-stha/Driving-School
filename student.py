@@ -54,8 +54,7 @@ profile_icon_button.place(x=1420, y=10)
 
 # Create a menu for the user
 user_menu = Menu(root, tearoff=0, bg="lightgray", fg="black", font=("Helvetica", 10, "bold"))
-user_menu.add_command(label="Sanjeev Manandhar", font=("Helvetica", 10), command=lambda: print("User clicked"))
-user_menu.add_separator()
+
 user_menu.add_command(label="Sign out", font=("Helvetica", 10, "bold"), command=signOut)
 
 # Bind the menu to the profile icon button
@@ -193,7 +192,7 @@ def edit_record(event):
     global editor
     editor = Tk()
     editor.title("Update Data")
-    editor.geometry(f'860x400+370+195')
+    editor.geometry(f'860x400+370+175')
     editor.resizable(False, False)
 
     global firstName_editor
@@ -226,7 +225,7 @@ def edit_record(event):
 
     instruction = Label(editor,text="Date must be in YYYY-MM-DD[2012-12-22]format",font=("arial rounded MT Bold",7)).place(x=10, y=140)
 
-    Client_id = Label(editor,text="Client id",font=("arial rounded MT Bold",8)).place(x=300, y=100)
+    Client_id = Label(editor,text="Citiszenship ID",font=("arial rounded MT Bold",8)).place(x=300, y=100)
     clientId_editor = Entry(editor,width=40)
     clientId_editor.place(x=300, y=120)
 
@@ -241,8 +240,8 @@ def edit_record(event):
     street = Label(editor,text="Street",font=("arial rounded MT Bold",8)).place(x=10,y=180)
     street_editor = Entry(editor,width=40)
     street_editor.place(x=10, y=200)
-    city = Label(editor,text="City",font=("arial rounded MT Bold",8)).place(x=300,y=180)
 
+    city = Label(editor,text="City",font=("arial rounded MT Bold",8)).place(x=300,y=180)
     city_editor = Entry(editor,width=40)
     city_editor.place(x=300, y=200)
 
@@ -292,9 +291,10 @@ def edit_record(event):
             messagebox.showerror('Error', 'All Fields Are Required.', parent=editor)
             return
        
-        if not firstName_editor.get().isalpha() or not lastName_editor.get().isalpha(): # Check if first name and last name contain only alphabets
-            messagebox.showerror('Error', 'First name and last name should contain only alphabets.', parent=editor)
+        if not firstName_editor.get().isalpha() or not lastName_editor.get().isalpha() or not state_editor.get().isalpha() or not country_editor.get().isalpha() or not city_editor.get().isalpha() or not category_editor.get().isalpha():
+            messagebox.showerror('Error', 'Recheck the given information.', parent=editor)
             return
+
 
          # Check if date is in the correct format and the person is above 16 years old
         try:
@@ -423,7 +423,7 @@ def edit_record(event):
         total_payment = f" RS {days_rented * price_per_day}"
         bill_window = Toplevel(root)
         bill_window.title("Bill")
-        bill_window.geometry("300x400+1240+195")
+        bill_window.geometry("300x400+1240+175")
      
         big_label = Label(bill_window, text="Payment Receipt", font=("cabiler", 19, "bold"),fg='sky blue')
         big_label.place(x=45, y=10)
@@ -453,7 +453,7 @@ def edit_record(event):
         Label(bill_window, text="Total Payment:",font=("arial rounded MT Bold",10)).place(x=25, y=245)
         Label(bill_window, text=total_payment,font=("arial rounded MT Bold",10)).place(x=140, y=245)
 
-        closed_button=Button(bill_window,text="Pay",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white",command=closed_record)
+        closed_button=Button(bill_window,text="Paid",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white",command=closed_record)
         closed_button.place(x=65,y=320)
             
     edit_button=Button(editor,text="Save",cursor='hand2',font=("arial rounded MT Bold",9,"bold"),height=2,width=15,activebackground='sky blue',bg='sky blue',fg="white",command=update_data)
@@ -492,7 +492,7 @@ tree.heading("ID", text="ID")
 tree.heading("First Name", text="First Name")
 tree.heading("Last Name", text="Last Name")
 tree.heading("DOB", text="DOB")
-tree.heading("Client ID", text="Client ID")
+tree.heading("Client ID", text="Citizenship ID")
 tree.heading("Email", text="Email")
 tree.heading("Number", text="Number")
 tree.heading("Street", text="Street")

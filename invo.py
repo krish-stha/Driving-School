@@ -70,8 +70,6 @@ profile_icon_button.place(x=1420, y=10)
 
 # Create a menu for the user
 user_menu = Menu(root, tearoff=0, bg="lightgray", fg="black", font=("Helvetica", 10, "bold"))
-user_menu.add_command(label="Sanjeev Manandhar", font=("Helvetica", 10), command=lambda: print("User clicked"))
-user_menu.add_separator()
 user_menu.add_command(label="Sign out", font=("Helvetica", 10, "bold"), command=signOut)
 
 # Bind the menu to the profile icon button

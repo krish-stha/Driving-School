@@ -43,7 +43,7 @@ def login_user():
             conn.close()
             root.destroy()
             import dashboard
-            
+
 def clear():
     """
     Clears the content of the username and password entry fields.
@@ -125,7 +125,7 @@ def forget_password():
     window=Toplevel()
     window.config(bg='black')
     window.title('password change.')
-    window.geometry(f'370x400+561+195')
+    window.geometry(f'370x400+1050+175')
 
     heading_label=Label(window,bg='black', text='Reset Password',font=('cabiler',18,'bold'),fg='#66a3ff')
     heading_label.place(x=80,y=20)
