@@ -10,7 +10,7 @@ root.geometry("1920x1080")
 root.title('Dashboard')
 root.config(bg="white")
 
-conn = sqlite3.connect("dri.db")
+conn = sqlite3.connect("drivingData.db")
 db = conn.cursor()
 db.execute("""CREATE TABLE IF NOT EXISTS usersTable(
                 usersId INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -135,7 +135,7 @@ def form():
         
         else:
             try:
-                conn = sqlite3.connect("dri.db")
+                conn = sqlite3.connect("drivingData.db")
                 db = conn.cursor()
                 db.execute(
                 """INSERT INTO usersTable(firstName,lastName,dob,clientId,email,number,street,city,state,country,category,zipCode,status) 
@@ -173,7 +173,7 @@ def form():
         None
     """
         try:
-            conn = sqlite3.connect("dri.db")
+            conn = sqlite3.connect("drivingData.db")
             db = conn.cursor()
 
             db.execute("SELECT * FROM usersTable")
@@ -250,7 +250,7 @@ def get_record_count():
         """
     Get the total count of records in the database.
 
-    This function connects to the 'dri.db' database and queries the 'usersTable'
+    This function connects to the 'drivingData.db' database and queries the 'usersTable'
     to count the total number of records. It then returns this count.
 
     Returns:
@@ -259,7 +259,7 @@ def get_record_count():
         global no_of_inquiry
         global no_of_ongoing_students
         no_of_inquiry=""
-        conn = sqlite3.connect("dri.db")
+        conn = sqlite3.connect("drivingData.db")
         cursor = conn.cursor()
 
         cursor.execute("SELECT COUNT(*) FROM usersTable")
@@ -272,7 +272,7 @@ def get_active_record_count():
         """
     Bring the count of records in the database that are active.
 
-    This function connects to the 'dri.db' database and queries the 'usersTable'
+    This function connects to the 'drivingData.db' database and queries the 'usersTable'
     to count the number of records where the status is 'active'. It then returns
     this count.
 
@@ -282,7 +282,7 @@ def get_active_record_count():
         global no_of_inquiry
         global no_of_ongoing_students
         no_of_inquiry=""
-        conn = sqlite3.connect("dri.db")
+        conn = sqlite3.connect("drivingData.db")
         cursor = conn.cursor()
 
         cursor.execute("SELECT COUNT(*) FROM usersTable WHERE status = 'active'")
@@ -294,7 +294,7 @@ def get_closed_record_count():
         """
     fetch the count of records in the database that are not active.
 
-    This function connects to the 'dri.db' database and queries the 'usersTable'
+    This function connects to the 'drivingData.db' database and queries the 'usersTable'
     to count the number of records where the status is not 'active'. It then returns
     this count.
 
@@ -304,7 +304,7 @@ def get_closed_record_count():
         global no_of_inquiry
         global no_of_ongoing_students
         no_of_inquiry=""
-        conn = sqlite3.connect("dri.db")
+        conn = sqlite3.connect("drivingData.db")
         cursor = conn.cursor()
 
         cursor.execute("SELECT COUNT(*) FROM usersTable WHERE status != 'active'")
@@ -348,7 +348,7 @@ profile_icon_button.place(x=1420, y=10)
 
 # Create a menu for the user
 user_menu = Menu(root, tearoff=0, bg="lightgray", fg="black", font=("Helvetica", 10, "bold"))
-user_menu.add_command(label="Sanjeev Manandhar", font=("Helvetica", 10), command=lambda: print("User clicked"))
+user_menu.add_command(label="Sanjeev Manandhar", font=("Helvetica", 10))
 user_menu.add_separator()
 user_menu.add_command(label="Sign out", font=("Helvetica", 10, "bold"), command=signOut)
 
