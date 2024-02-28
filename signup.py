@@ -32,7 +32,7 @@ def connect_database():
     it displays an error message. Otherwise, it performs various validations on
     the input fields such as ensuring all fields are filled, matching passwords,
     valid email format, valid contact number, and alphabetic first and last names.
-    If all validations pass, it inserts the new user into the database and displays
+    If all validations pass, it  inserts the new user into the database and displays
     a success message. Finally, it clears the input fields, closes the database
     connection, destroys the current root window, and imports the 'login' module
     to open the login window.
