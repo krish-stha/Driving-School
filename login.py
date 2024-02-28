@@ -72,7 +72,7 @@ def forget_password():
         Handles the password change process.
         
         Retrieves the entered email and new password, validates the input fields,
-        checks if the email exists in the database, and updates the password if all
+        checks if the  email exists in the database, and updates the password if all
         conditions are met.
 
         Returns:
