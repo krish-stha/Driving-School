@@ -14,7 +14,7 @@ def log_in():
     
     This function closes the current root window, typically associated with a
     signup or registration interface, and opens the login window. It achieves this
-    by destroying the root window and importing the 'login' module.
+    by destroying the root  window and importing the 'login' module.
 
     Returns:
         None
