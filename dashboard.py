@@ -336,7 +336,6 @@ def signOut():
 def show_user_menu(event):
     """
     Displays the user menu at the specified coordinates.
-
     This function displays the user menu at the specified coordinates (event.x_root, event.y_root).
     """
     user_menu.post(event.x_root, event.y_root)
