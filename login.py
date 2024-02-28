@@ -57,7 +57,7 @@ def forget_password():
     """
     Displays a window for users to reset their password.
     
-    The function creates a new window where users can input their email address,
+    The function creates  a new window where users can input their email address,
     new password, and confirm the new password. Upon clicking the "Change Password"
     button, it checks if all fields are filled, if the new password matches the 
     confirmation, and if the provided email exists in the database. If all conditions
