@@ -10,7 +10,7 @@ root.geometry("1920x1080")
 root.title('Dashboard')
 root.config(bg="white")
 
-conn = sqlite3.connect("drivingData.db")
+conn = sqlite3.connect("real.db")
 db = conn.cursor()
 db.execute("""CREATE TABLE IF NOT EXISTS usersTable(
                 usersId INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -95,9 +95,9 @@ def form():
             return
 
         # Check if first name and last name contain only alphabets
-        if not first_name_value.isalpha() or not last_name_value.isalpha() or not state_value.isalpha() or not country_value.isalpha() or not city_value.isalpha() or not category_value.isalpha():
-            messagebox.showerror('Error', 'Recheck the given information.', parent=window)
-            return
+        # if not first_name_value.isalpha() or not last_name_value.isalpha() or not state_value.isalpha() or not country_value.isalpha() or not city_value.isalpha() or not category_value.isalpha():
+        #     messagebox.showerror('Error', 'Recheck the given information.', parent=window)
+        #     return
 
          # Check if date is in the correct format and the person is above 16 years old
         
@@ -135,7 +135,7 @@ def form():
         
         else:
             try:
-                conn = sqlite3.connect("drivingData.db")
+                conn = sqlite3.connect("real.db")
                 db = conn.cursor()
                 db.execute(
                 """INSERT INTO usersTable(firstName,lastName,dob,clientId,email,number,street,city,state,country,category,zipCode,status) 
@@ -173,7 +173,7 @@ def form():
         None
     """
         try:
-            conn = sqlite3.connect("drivingData.db")
+            conn = sqlite3.connect("real.db")
             db = conn.cursor()
 
             db.execute("SELECT * FROM usersTable")
@@ -250,7 +250,7 @@ def get_record_count():
         """
     Get the total count of records in the database.
 
-    This function connects to the 'drivingData.db' database and queries the 'usersTable'
+    This function connects to the 'real.db' database and queries the 'usersTable'
     to count the total number of records. It then returns this count.
 
     Returns:
@@ -259,7 +259,7 @@ def get_record_count():
         global no_of_inquiry
         global no_of_ongoing_students
         no_of_inquiry=""
-        conn = sqlite3.connect("drivingData.db")
+        conn = sqlite3.connect("real.db")
         cursor = conn.cursor()
 
         cursor.execute("SELECT COUNT(*) FROM usersTable")
@@ -272,7 +272,7 @@ def get_active_record_count():
         """
     Bring the count of records in the database that are active.
 
-    This function connects to the 'drivingData.db' database and queries the 'usersTable'
+    This function connects to the 'real.db' database and queries the 'usersTable'
     to count the number of records where the status is 'active'. It then returns
     this count.
 
@@ -282,7 +282,7 @@ def get_active_record_count():
         global no_of_inquiry
         global no_of_ongoing_students
         no_of_inquiry=""
-        conn = sqlite3.connect("drivingData.db")
+        conn = sqlite3.connect("real.db")
         cursor = conn.cursor()
 
         cursor.execute("SELECT COUNT(*) FROM usersTable WHERE status = 'active'")
@@ -294,7 +294,7 @@ def get_closed_record_count():
         """
     fetch the count of records in the database that are not active.
 
-    This function connects to the 'drivingData.db' database and queries the 'usersTable'
+    This function connects to the 'real.db' database and queries the 'usersTable'
     to count the number of records where the status is not 'active'. It then returns
     this count.
 
@@ -304,7 +304,7 @@ def get_closed_record_count():
         global no_of_inquiry
         global no_of_ongoing_students
         no_of_inquiry=""
-        conn = sqlite3.connect("drivingData.db")
+        conn = sqlite3.connect("real.db")
         cursor = conn.cursor()
 
         cursor.execute("SELECT COUNT(*) FROM usersTable WHERE status != 'active'")

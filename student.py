@@ -65,7 +65,7 @@ def search_students():
     Perform a search operation on student records based on the provided search query.
 
     Retrieves the search query from the entry widget and searches for matching records in the 'usersTable' table
-    of the 'drivingData.db' SQLite database. Clears the existing data in the Treeview widget and displays the search
+    of the 'real.db' SQLite database. Clears the existing data in the Treeview widget and displays the search
     results if any, otherwise displays an error message in case of database errors.
     """
     search_query = entry.get() # Get the search query from the entry widget
@@ -74,7 +74,7 @@ def search_students():
         tree.delete(record)
 
     try: # Perform the search operation in your database
-        conn = sqlite3.connect("drivingData.db")
+        conn = sqlite3.connect("real.db")
         db = conn.cursor()
 
         # Perform the search query in the database
@@ -209,7 +209,7 @@ def edit_record(event):
     global zipCode_editor
     global category_value
 
-    conn = sqlite3.connect("drivingData.db")
+    conn = sqlite3.connect("real.db")
 
     first_name = Label(editor,text="First Name",font=("arial rounded MT Bold",8)).place(x=10, y=50)
     firstName_editor = Entry(editor,width=40)
@@ -322,7 +322,7 @@ def edit_record(event):
             messagebox.showerror('Error', 'Phone number must be a 10-digit number.', parent=editor)
             return
         else:
-            conn = sqlite3.connect("drivingData.db")
+            conn = sqlite3.connect("real.db")
             db = conn.cursor()
             db.execute(
                 """
@@ -360,7 +360,7 @@ def edit_record(event):
 
             This function first checks if a record is selected in the Treeview widget 'tree'. If no record is selected, it displays a warning.
             If a record is selected, it asks for confirmation before proceeding with the deletion. If confirmed, it deletes the selected record
-            from the 'usersTable' table in the 'drivingData.db' SQLite database and removes it from the Treeview widget.
+            from the 'usersTable' table in the 'real.db' SQLite database and removes it from the Treeview widget.
     """
         selected_item = tree.selection()
         if not selected_item:
@@ -373,7 +373,7 @@ def edit_record(event):
 
         for item in selected_item:
             item_id = tree.item(item, "values")[0]
-            conn = sqlite3.connect("drivingData.db")
+            conn = sqlite3.connect("real.db")
             cursor = conn.cursor()
             cursor.execute("DELETE FROM usersTable WHERE usersId=?", (item_id,))
             conn.commit()
@@ -387,7 +387,7 @@ def edit_record(event):
             Function to close the editor window.
             This function destroys the Tkinter window named 'editor'.
           """
-          conn = sqlite3.connect("drivingData.db")
+          conn = sqlite3.connect("real.db")
           cursor = conn.cursor()
           cursor.execute("UPDATE usersTable SET status = 'closed' WHERE usersId = ?", (userId,))
           conn.commit()
@@ -473,10 +473,10 @@ def show_data():
     """
     Function to display data from the 'usersTable' table in the Treeview widget.
 
-    This function retrieves all records from the 'usersTable' table in the 'drivingData.db' SQLite database,
+    This function retrieves all records from the 'usersTable' table in the 'real.db' SQLite database,
     inserts each record into the Treeview widget 'tree', and then closes the database connection.
     """
-    conn = sqlite3.connect("drivingData.db")
+    conn = sqlite3.connect("real.db")
     cursor = conn.cursor()
     cursor.execute("SELECT * FROM usersTable")
     rows = cursor.fetchall()
