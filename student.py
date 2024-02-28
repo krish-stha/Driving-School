@@ -13,7 +13,7 @@ category_value=""
 
 def home():
     """
-    Function to return to the home/dashboard screen.
+    Function to  return to the home/dashboard screen.
     This function closes the current Tkinter window and imports the 'dashboard' module.
     """
     root.destroy()
