@@ -18,7 +18,7 @@ def login_user():
         This function attempts to log in a user by checking if the username and password fields are not empty.
         If both fields are filled, it connects to a SQLite database, retrieves user data based on the provided
         username and password, and verifies if such a user exists. If the user exists, it displays a success
-        message;  otherwise, it shows an error message indicating invalid credentials.
+        message; otherwise, it shows an error message indicating invalid credentials.
         
       """
     if username_entry.get() == '' or password_entry.get() == '':
