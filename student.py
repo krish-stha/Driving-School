@@ -39,7 +39,7 @@ def show_user_menu(event):
     This function displays the user menu at the specified coordinates (event.x_root, event.y_root).
 
     Args:
-        event (Tkinter.Event): The event that triggered the menu display.
+        event (Tkinter.Event): The  event that triggered the menu display.
 
     Returns:
         None
