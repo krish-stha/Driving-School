@@ -7,7 +7,6 @@ import sqlite3
 
 
 #Start login page
-
 root= Tk()
 root.title("login")
 root.geometry("1980x1080")
