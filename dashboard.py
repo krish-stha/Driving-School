@@ -70,7 +70,7 @@ def form():
     Retrieves user-entered data from the entry fields, validates the input,
     including ensuring all fields are filled, correct date format, age above 16,
     email ends with '@gmail.com', valid phone number, and then inserts the data
-    into the SQLite database and updated the numbers of inquiries,ongoing Students.
+    into the SQLite database and  updated the numbers of inquiries,ongoing Students.
     Returns:
     
         None
