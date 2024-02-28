@@ -70,15 +70,14 @@ def form():
     Retrieves user-entered data from the entry fields, validates the input,
     including ensuring all fields are filled, correct date format, age above 16,
     email ends with '@gmail.com', valid phone number, and then inserts the data
-    into the SQLite database and updated the numbers of inquiries,ongoing Students.
+    into the SQLite database and  updated the numbers of inquiries,ongoing Students.
     Returns:
     
         None
     """
         first_name_value=first_name_box.get()
         last_name_value=last_name_box.get()
-        date_value=date_box.get()
-        
+        date_value=date_box.get() 
         client_id_value=client_id_box.get()
         email_value=email_box.get()
         phone_value=phone_box.get()
@@ -90,7 +89,7 @@ def form():
         category_value=category_box.get()
         user_status="active"
 
-        # Check if any required field is empty
+        # Check if any required  field is empty
         if (first_name_value == '' or last_name_value == '' or client_id_value =='' or date_value == '' or email_value == '' or phone_value == '' or street_value == '' or category_value=='' or city_value== '' or state_value == '' or zip_value == '' or country_value == ''):
             messagebox.showerror('Error', 'All Fields Are Required.', parent=window)
             return

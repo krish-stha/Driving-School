@@ -26,13 +26,13 @@ def connect_database():
     """
     Connects to the SQLite database and creates a table if it doesn't exist.
     
-    This function connects to the SQLite database file named 'dri.db' and creates
+    This function connects to  the SQLite database file named 'dri.db' and creates
     a table named 'information' if it doesn't already exist. It then checks if
     the provided email already exists in the database. If the email already exists,
     it displays an error message. Otherwise, it performs various validations on
     the input fields such as ensuring all fields are filled, matching passwords,
     valid email format, valid contact number, and alphabetic first and last names.
-    If all validations pass, it inserts the new user into the database and displays
+    If all validations pass, it  inserts the new user into the database and displays
     a success message. Finally, it clears the input fields, closes the database
     connection, destroys the current root window, and imports the 'login' module
     to open the login window.

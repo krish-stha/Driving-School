@@ -21,7 +21,7 @@ def home():
     
 def signOut():
     """
-    Closes the current window and navigates to the login page.
+    Closes the  current window and navigates to the login page.
 
     This function closes  the current Tkinter window (root) and then imports
     the login module to navigate to the login page.
@@ -39,7 +39,7 @@ def show_user_menu(event):
     This function displays the user menu at the specified coordinates (event.x_root, event.y_root).
 
     Args:
-        event (Tkinter.Event): The event that triggered the menu display.
+        event (Tkinter.Event): The  event that triggered the menu display.
 
     Returns:
         None
