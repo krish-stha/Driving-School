@@ -10,7 +10,7 @@ root.geometry("1920x1080")
 
 def log_in():
     """
-    Closes the current root window and opens the login window.
+    Closes the  current root window and opens the login window.
     
     This function closes the current root window, typically associated with a
     signup or registration interface, and opens the login window. It achieves this
