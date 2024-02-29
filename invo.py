@@ -148,7 +148,7 @@ def change_password():
         conn.close()
         return
 
-    # Convert  both passwords to lowercase before comparison
+    # Convert both passwords to lowercase before comparison
     if user[5].lower() != old_password.lower():
         messagebox.showerror("Error", "Incorrect old password")
         conn.close()
