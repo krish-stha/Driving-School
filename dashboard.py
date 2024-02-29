@@ -4,7 +4,7 @@ from tkinter import messagebox
 import sqlite3
 from datetime import datetime
 
-####MAKE WINDOW########
+####MAKE WINDOW## ######
 root=Tk()
 root.geometry("1920x1080")
 root.title('Dashboard')
