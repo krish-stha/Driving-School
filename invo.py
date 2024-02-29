@@ -41,7 +41,7 @@ def signOut():
     Closes the current window and navigates to the login page.
 
     This function closes the current Tkinter window (root) and then imports
-    the login module to navigate  to the login page.
+    the login module  to navigate  to the login page.
 
     Returns:
         None
