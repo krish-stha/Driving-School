@@ -33,7 +33,7 @@ conn.close()
   
 def std():
     """
-    Closes the current root window and opens the student window.
+    Closes the current root  window and opens the student window.
     
     This function closes the current root window and imports the 'student' module
     to open the student window. It's typically used for navigation from one interface
