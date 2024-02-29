@@ -96,7 +96,7 @@ def connect_database():
             
 def clear():
     """
-    Clears all input fields.
+    Clears all  input fields.
     
     This function clears the content of the email, first name, last name, contact,
     password, and confirm password entry fields.
