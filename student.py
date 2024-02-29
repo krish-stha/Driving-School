@@ -46,7 +46,7 @@ def show_user_menu(event):
     """
     user_menu.post(event.x_root, event.y_root)
 
-profile_image = PhotoImage(file="b.png")
+profile_image =PhotoImage(file="b.png")
 
 # Create a profile icon button with the image
 profile_icon_button = Button(root, cursor='hand2', image=profile_image, bd=0, bg="white", width=32, height=32)

@@ -52,7 +52,7 @@ def connect_database():
                     password VARCHAR(255)
                     )""")
 
-    # Check if the email already exists
+    # Check if the  email already exists
     email = email_entry.get()
     db.execute("SELECT * FROM information WHERE email=?", (email,))
     existing_user = db.fetchone()
