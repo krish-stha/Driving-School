@@ -161,7 +161,7 @@ def forget_password():
    
 def login():
     """
-    Closes the current root window and opens the signup window.
+    Closes the  current root window and opens the signup window.
     
     This function is responsible for closing the current root window, typically
     associated with a login interface, and opening the signup window. It performs
