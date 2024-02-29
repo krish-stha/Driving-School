@@ -112,7 +112,7 @@ def clear():
     conf_password_entry.delete(0, 'end')
 
 
-############Creates Sign Up Page UI###############
+############Creates Sign Up  Page UI###############
     
 title = Label(root,text="Already have an account?",font=("Honk",11)).place(x=1280, y=25)
 Login = Button(root,text="Login",border=0,cursor='hand2',font=("Honk",11,"underline"),fg="sky blue",command=log_in).place(x=1450, y=24)
