@@ -25,7 +25,7 @@ def home():
 
 def std():
     """
-    Closes the current window and navigates to the student page.
+    Closes the current  window and navigates to the student page.
 
     This function closes the current Tkinter window (root) and then imports
     the student module to navigate to the student page.
