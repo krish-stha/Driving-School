@@ -89,7 +89,7 @@ def form():
         category_value=category_box.get()
         user_status="active"
 
-        # Check if any required  field is empty
+        # Check if any required field is empty
         if (first_name_value == '' or last_name_value == '' or client_id_value =='' or date_value == '' or email_value == '' or phone_value == '' or street_value == '' or category_value=='' or city_value== '' or state_value == '' or zip_value == '' or country_value == ''):
             messagebox.showerror('Error', 'All Fields Are Required.', parent=window)
             return
