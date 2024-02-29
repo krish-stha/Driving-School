@@ -76,7 +76,7 @@ def forget_password():
         conditions are met.
 
         Returns:
-            None
+            None 
         """
         if email_entry.get()=='' or new_pass_entry.get()=='' or conf_pass_entry.get()=='':
             messagebox.showerror('Error','All Fields Are Rsequired',parent=window) # error show in window 

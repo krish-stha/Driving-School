@@ -94,10 +94,10 @@ def form():
             messagebox.showerror('Error', 'All Fields Are Required.', parent=window)
             return
 
-        # Check if first name and last name contain only alphabets
-        # if not first_name_value.isalpha() or not last_name_value.isalpha() or not state_value.isalpha() or not country_value.isalpha() or not city_value.isalpha() or not category_value.isalpha():
-        #     messagebox.showerror('Error', 'Recheck the given information.', parent=window)
-        #     return
+        # # Check if first name and last name contain only alphabets
+        if not first_name_value.isalpha() or not last_name_value.isalpha() or not state_value.isalpha() or not country_value.isalpha() or not city_value.isalpha() or not category_value.isalpha():
+            messagebox.showerror('Error', 'Recheck the given information.', parent=window)
+            return
 
          # Check if date is in the correct format and the person is above 16 years old
         
